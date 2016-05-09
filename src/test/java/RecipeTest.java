@@ -7,9 +7,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by Marceli on 09.05.2016.
- */
 public class RecipeTest {
     private Recipe testRecipe;
 
@@ -23,10 +20,9 @@ public class RecipeTest {
 
     @Test
     public void TestIngredients() {
-        List<Ingredient> ingredients = testRecipe.getIngredients();
-        assertEquals("Potato", ingredients.get(0).getName());
-        assertEquals("Grams", ingredients.get(0).getUnit());
-        assertEquals(20, ingredients.get(0).getAmount());
+        assertEquals("Potato", testRecipe.getIngredients().get(0).getName());
+        assertEquals("Grams", testRecipe.getIngredients().get(0).getUnit());
+        assertEquals(20, testRecipe.getIngredients().get(0).getAmount());
 
     }
 
@@ -34,10 +30,12 @@ public class RecipeTest {
     public void TestTitle() {
         assertEquals("Noodles", testRecipe.getTitle());
     }
+
     @Test
     public void TestDescription() {
         assertEquals("Great noodles for everyone", testRecipe.getDescription());
     }
+
     @Test
     public void TestImages() {
         assertEquals(null, testRecipe.getImage());
