@@ -21,7 +21,7 @@ public class Recipe {
     }
 
     public String getDescription() {
-        return getDescription();
+        return description;
     }
 
     public List<Ingredient> getIngredients() {
