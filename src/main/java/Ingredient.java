@@ -1,30 +1,30 @@
 
-public class Ingredient {
+class Ingredient {
     private String name;
     private String unit;
     private final int defaultAmount;
     private int amount;
 
-    public Ingredient(String name, String unit, int amount) {
+    Ingredient(String name, String unit, int amount) {
         this.name = name;
         this.unit = unit;
         defaultAmount = amount;
         this.amount = amount;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public String getUnit() {
+    String getUnit() {
         return unit;
     }
 
-    public int getAmount() {
+    int getAmount() {
         return amount;
     }
 
-    public void reScale(int numberOfPeople) {
+    void reScale(int numberOfPeople) {
         amount = numberOfPeople * defaultAmount;
     }
 

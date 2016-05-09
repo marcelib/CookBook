@@ -1,38 +1,38 @@
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-public class Recipe {
+class Recipe {
     private String title;
     private String description;
-    private List<Ingredient> ingredients;
+    private List<Ingredient> ingredientList;
     private BufferedImage image;
     private BufferedImage miniature;
 
-    public Recipe(String title, String description, List<Ingredient> ingredients, BufferedImage image, BufferedImage miniature) {
+    Recipe(String title, String description, List<Ingredient> ingredientList, BufferedImage image, BufferedImage miniature) {
         this.title = title;
         this.description = description;
-        this.ingredients = ingredients;
+        this.ingredientList = ingredientList;
         this.image = image;
         this.miniature = miniature;
     }
 
-    public String getTitle() {
+    String getTitle() {
         return title;
     }
 
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 
-    public List<Ingredient> getIngredients() {
-        return ingredients;
+    List<Ingredient> getIngredientList() {
+        return ingredientList;
     }
 
-    public BufferedImage getImage() {
+    BufferedImage getImage() {
         return image;
     }
 
-    public BufferedImage getMiniature() {
+    BufferedImage getMiniature() {
         return miniature;
     }
 

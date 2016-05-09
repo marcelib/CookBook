@@ -18,7 +18,7 @@ public class IngredientTest {
     }
 
     @Test
-    public void reScaleTest() {
+    public void testReScale() {
         testIngredient.reScale(5);
         assertEquals("Pepper   100  grams", testIngredient.toString());
         testIngredient.reScale(2);
