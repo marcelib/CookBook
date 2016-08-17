@@ -7,33 +7,38 @@ class Recipe {
     private List<Ingredient> ingredientList;
     private BufferedImage image;
     private BufferedImage miniature;
+    private int numberOfPeople;
 
-    Recipe(String title, String description, List<Ingredient> ingredientList, BufferedImage image, BufferedImage miniature) {
+    Recipe (String title, String description, List<Ingredient> ingredientList, BufferedImage image, BufferedImage miniature, int numberOfPeople) {
         this.title = title;
         this.description = description;
         this.ingredientList = ingredientList;
         this.image = image;
         this.miniature = miniature;
+        this.numberOfPeople = numberOfPeople;
     }
 
-    String getTitle() {
+    String getTitle () {
         return title;
     }
 
-    String getDescription() {
+    String getDescription () {
         return description;
     }
 
-    List<Ingredient> getIngredientList() {
+    List<Ingredient> getIngredientList () {
         return ingredientList;
     }
 
-    BufferedImage getImage() {
+    BufferedImage getImage () {
         return image;
     }
 
-    BufferedImage getMiniature() {
+    BufferedImage getMiniature () {
         return miniature;
     }
 
+    int getNumberOfPeople () {
+        return numberOfPeople;
+    }
 }

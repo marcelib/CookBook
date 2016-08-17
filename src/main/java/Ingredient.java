@@ -1,34 +1,34 @@
-
 class Ingredient {
+    private final int defaultAmount;
     private String name;
     private String unit;
-    private final int defaultAmount;
     private int amount;
 
-    Ingredient(String name, String unit, int amount) {
+    Ingredient (String name, String unit, int amount, int numberOfPeople) {
         this.name = name;
         this.unit = unit;
-        defaultAmount = amount;
-        this.amount = amount;
+        defaultAmount = (amount + numberOfPeople - 1) / numberOfPeople;
+        this.amount = defaultAmount;
     }
 
-    String getName() {
+    String getName () {
         return name;
     }
 
-    String getUnit() {
+    String getUnit () {
         return unit;
     }
 
-    int getAmount() {
+    int getAmount () {
         return amount;
     }
 
-    void reScale(int numberOfPeople) {
+    void reScale (int numberOfPeople) {
         amount = numberOfPeople * defaultAmount;
     }
 
-    public String toString() {
+    public String toString () {
         return name + "   " + amount + "  " + unit;
     }
 }
+

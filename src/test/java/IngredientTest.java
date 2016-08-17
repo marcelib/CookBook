@@ -7,18 +7,18 @@ public class IngredientTest {
     private Ingredient testIngredient;
 
     @Before
-    public void setUp() {
-        testIngredient = new Ingredient("Pepper", "grams", 20);
+    public void setUp () {
+        testIngredient = new Ingredient("Pepper", "grams", 20, 1);
 
     }
 
     @Test
-    public void testToString() {
+    public void testToString () {
         assertEquals("Pepper   20  grams", testIngredient.toString());
     }
 
     @Test
-    public void testReScale() {
+    public void testReScale () {
         testIngredient.reScale(5);
         assertEquals("Pepper   100  grams", testIngredient.toString());
         testIngredient.reScale(2);

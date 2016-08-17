@@ -7,26 +7,26 @@ class Category {
     private BufferedImage categoryImage;
     private BufferedImage categoryMiniature;
 
-    Category(String title, List<Recipe> recipeList, BufferedImage categoryImage, BufferedImage categoryMiniature) {
+    Category (String title, List<Recipe> recipeList, BufferedImage categoryImage, BufferedImage categoryMiniature) {
         this.title = title;
         this.recipeList = recipeList;
         this.categoryImage = categoryImage;
         this.categoryMiniature = categoryMiniature;
     }
 
-    public String getTitle() {
+    String getTitle () {
         return title;
     }
 
-    List<Recipe> getRecipeList() {
+    List<Recipe> getRecipeList () {
         return recipeList;
     }
 
-    BufferedImage getCategoryImage() {
+    BufferedImage getCategoryImage () {
         return categoryImage;
     }
 
-    BufferedImage getCategoryMiniature() {
+    BufferedImage getCategoryMiniature () {
         return categoryMiniature;
     }
 
