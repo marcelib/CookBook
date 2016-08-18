@@ -1,10 +1,12 @@
-class Ingredient {
+package cookbook.model;
+
+public class Ingredient {
     private final int defaultAmount;
     private String name;
     private String unit;
     private int amount;
 
-    Ingredient (String name, String unit, int amount, int numberOfPeople) {
+    public Ingredient (String name, String unit, int amount, int numberOfPeople) {
         this.name = name;
         this.unit = unit;
         defaultAmount = (amount + numberOfPeople - 1) / numberOfPeople;
@@ -23,7 +25,7 @@ class Ingredient {
         return amount;
     }
 
-    void reScale (int numberOfPeople) {
+    public void reScale (int numberOfPeople) {
         amount = numberOfPeople * defaultAmount;
     }
 

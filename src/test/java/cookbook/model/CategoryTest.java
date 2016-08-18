@@ -1,3 +1,5 @@
+package cookbook.model;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,12 +15,18 @@ public class CategoryTest {
 
     @Before
     public void setUp () throws IOException {
+
         BufferedImage testImage = ImageIO.read(this.getClass().getResource("/testImage.png"));
         BufferedImage testMiniature = ImageIO.read(this.getClass().getResource("/testMiniature.png"));
+
         Ingredient testIngredient1 = new Ingredient("Potato", "Grams", 20, 1);
         Ingredient testIngredient2 = new Ingredient("Fries", "Grams", 200, 1);
-        Recipe testRecipe1 = new Recipe("Noodles", "Great noodles for everyone", Arrays.asList(testIngredient1, testIngredient2), testImage, testMiniature, 5);
-        Recipe testRecipe2 = new Recipe("French fries", "A classic dinner!", Arrays.asList(testIngredient1, testIngredient2), testImage, testMiniature, 5);
+
+        Recipe testRecipe1 = new Recipe("Noodles", "Great noodles for everyone",
+                Arrays.asList(testIngredient1, testIngredient2), testImage, testMiniature, 5);
+        Recipe testRecipe2 = new Recipe("French fries", "A classic dinner!",
+                Arrays.asList(testIngredient1, testIngredient2), testImage, testMiniature, 5);
+
         testCategory = new Category("Dinner", Arrays.asList(testRecipe1, testRecipe2), testImage, testMiniature);
     }
 

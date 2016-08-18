@@ -1,3 +1,5 @@
+package cookbook.model;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,10 +14,12 @@ public class RecipeTest {
 
     @Before
     public void setUp () throws IOException {
-        testRecipe = new Recipe("Noodles", "Great noodles for everyone", Arrays.asList(new Ingredient("Potato", "Grams", 20, 1),
-                new Ingredient("Herbs", "Grams", 2, 1),
-                new Ingredient("Water", "Liters", 20, 1)), ImageIO.read(this.getClass().getResource("/testImage.png")), ImageIO.read(this.getClass().getResource("/testMiniature.png")), 5);
-
+        testRecipe = new Recipe("Noodles", "Great noodles for everyone",
+                Arrays.asList(new Ingredient("Potato", "Grams", 20, 1),
+                        new Ingredient("Herbs", "Grams", 2, 1),
+                        new Ingredient("Water", "Liters", 20, 1)),
+                ImageIO.read(this.getClass().getResource("/testImage.png")),
+                ImageIO.read(this.getClass().getResource("/testMiniature.png")), 5);
     }
 
     @Test

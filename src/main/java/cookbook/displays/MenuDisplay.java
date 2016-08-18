@@ -1,3 +1,6 @@
+package cookbook.displays;
+
+import cookbook.CookBook;
 import net.miginfocom.swing.MigLayout;
 
 import javax.imageio.ImageIO;
@@ -7,19 +10,19 @@ import java.io.File;
 import java.io.IOException;
 
 
-class MenuDisplay extends JFrame {
+public class MenuDisplay extends JFrame {
 
     private JFrame menuDisplay;
     private JPanel recPanel;
     private JLabel picLabel;
 
 
-    MenuDisplay () throws IOException {
-        ImageIcon picture = new ImageIcon(ImageIO.read(new File("images/StartPage.jpeg")));
+    public MenuDisplay () throws IOException {
         picLabel = new JLabel();
-        picLabel.setIcon(picture);
+        picLabel.setIcon(new ImageIcon(ImageIO.read(new File("images/StartPage.jpeg"))));
     }
 
+    @Override
     public void setVisible (boolean b) {
         menuDisplay.setVisible(b);
     }
@@ -34,7 +37,7 @@ class MenuDisplay extends JFrame {
     }
 
 
-    void createAndShowGUI () throws IOException {
+    public void createAndShowGUI () throws IOException {
 
         menuDisplay = new JFrame("CookBook- Welcome!");
         recPanel = new JPanel(new MigLayout());

@@ -1,3 +1,5 @@
+package cookbook.model;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,7 +11,6 @@ public class IngredientTest {
     @Before
     public void setUp () {
         testIngredient = new Ingredient("Pepper", "grams", 20, 1);
-
     }
 
     @Test

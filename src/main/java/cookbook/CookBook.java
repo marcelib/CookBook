@@ -1,3 +1,12 @@
+package cookbook;
+
+import cookbook.displays.CategoryDisplay;
+import cookbook.displays.MenuDisplay;
+import cookbook.displays.RecipeDisplay;
+import cookbook.model.Category;
+import cookbook.model.Ingredient;
+import cookbook.model.Recipe;
+
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
@@ -5,11 +14,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static javax.swing.SwingUtilities.invokeLater;
+
 public class CookBook {
 
     private static Integer currentCategory;
     private static Integer currentRecipe;
     private static List<Category> categories = new ArrayList<>();
+    //Observer pattern- state is defined by these three objects
     private static RecipeDisplay recDisplay;
     private static CategoryDisplay catDisplay;
     private static MenuDisplay menuDisplay;
@@ -18,6 +30,7 @@ public class CookBook {
     }
 
     public static void main (String[] args) throws IOException {
+
         Recipe recipe1 = new Recipe("Hamburger 1", "A hamburger 1 (or cheeseburger " +
                 "when served with a slice of cheese) is a sandwich consisting of one or more\n" +
                 " cooked patties of ground meat, usually beef, placed inside a sliced bread roll or bun.\n" +
@@ -27,6 +40,7 @@ public class CookBook {
                 Arrays.asList(new Ingredient("Rolls", "", 2, 2), new Ingredient("Meat", "Ounces", 10, 2),
                         new Ingredient("Onion", "Grams", 30, 2), new Ingredient("Mustard", "Spoons", 2, 2)),
                 ImageIO.read(new File("images/hamburger.jpg")), null, 2);
+
         Recipe recipe2 = new Recipe("Salad 2", "A salad is a dish consisting of small pieces of food, which" +
                 " may be mixed with a sauce or salad dressing. They are typically served cold. \n" +
                 "Salads can incorporate a variety of foods including vegetables, fruits, cheese, cooked meat, eggs, grains and nuts.\n" +
@@ -35,20 +49,21 @@ public class CookBook {
                 Arrays.asList(new Ingredient("Salad", "Grams", 200, 1), new Ingredient("Chicken", "Grams", 100, 1),
                         new Ingredient("Feta cheese", "Grams", 50, 1), new Ingredient("Spices mix", "spoons", 2, 1)),
                 ImageIO.read(new File("images/salad.jpg")), null, 1);
+
         Recipe recipe3 = new Recipe("Pizza 3", "“This classic American recipe with a killer crusty base and" +
                 " beautiful meaty toppings makes the perfect pizza. ”",
                 Arrays.asList(new Ingredient("Water", "Grams", 600, 4), new Ingredient("Yeast", "Grams", 16, 4),
                         new Ingredient("Mozzarella Cheese", "Grams", 400, 4), new Ingredient("Tomato Sauce", "Millilitres", 100, 4),
                         new Ingredient("Frech Chilies", "", 4, 4), new Ingredient("Pork sausages", "", 4, 4)),
                 ImageIO.read(new File("images/pizza.jpg")), null, 4);
+
         Recipe recipe4 = new Recipe("Spaghetti 4", "A great introduction to pasta for kids – loads of fun to eat," +
                 " and a brilliant base for adding all kinds of other fresh ingredients. ",
                 Arrays.asList(new Ingredient("Tomatoes", "Grams", 1000, 5), new Ingredient("Spaghetti", "Grams", 480, 5),
                         new Ingredient("Parmesan Cheese", "Grams", 100, 5), new Ingredient("Garlic", "Cloves", 5, 5),
                         new Ingredient("Vinegar", "Teaspoons", 5, 5), new Ingredient("Basil", "Grams", 20, 5)),
                 ImageIO.read(new File("images/spaghetti.jpeg")), null, 5);
-        setRecDisplay(new RecipeDisplay(recipe1));
-        setMenuDisplay(new MenuDisplay());
+
         Category firstCategory = new Category("Dinners", Arrays.asList(recipe1, recipe2, recipe3, recipe4),
                 ImageIO.read(new File("images/DinnerCategory.jpg")), ImageIO.read(new File("images/DinnerCategory.jpg")));
 
@@ -76,6 +91,7 @@ public class CookBook {
                         new Ingredient("Water", "Cups", 2, 2), new Ingredient("Sugar", "Teaspoons", 2, 2)
                         , new Ingredient("Cinnamon", "Teaspoons", 4, 2)),
                 ImageIO.read(new File("images/cherry-pie-with-cream.jpeg")), null, 1);
+
         Recipe dessertRecipe4 = new Recipe("Bananas with Chocolate 8", "This delicous recipe is very easy to make as well as very tasty!\n" +
                 "Peel and slice the banana. Scoop the ice cream into a bowl.\n " +
                 "Top with the banana, chocolate sauce, and coconut.\n",
@@ -100,7 +116,8 @@ public class CookBook {
                         new Ingredient("Cranberry Juice", "ml", 50, 1),
                         new Ingredient("Ice", "Cubes", 1, 1)),
                 ImageIO.read(new File("images/drink2.jpg")), null, 1);
-        Recipe drinkRecipe3 = new Recipe("Summer Cocktail 11", "Recipe courtesy Nico Szymanski, head mixologist, Gerber Group, New York City\n" +
+
+        Recipe drinkRecipe3 = new Recipe("Summer Cocktail 11", "cookbook.model.Recipe courtesy Nico Szymanski, head mixologist, Gerber Group, New York City\n" +
                 "This cocktail was created for Irvington, Gerber Group’s new restaurant across from NYC’s Union Square.\n" +
                 "While Szymanski sources his produce from local farmers at the famed Union Square Greenmarket,\n" +
                 "bonus points to you if you can pluck fresh mint and blackberries from your garden to make this tall, bubbly drink.\n",
@@ -108,15 +125,19 @@ public class CookBook {
                         new Ingredient("Blackberries", "grams", 50, 2),
                         new Ingredient("Fruit syrup", "Teaspoons", 4, 2)),
                 ImageIO.read(new File("images/drink3.jpg")), null, 2);
+
         Category thirdCategory = new Category("Drinks", Arrays.asList(drinkRecipe1, drinkRecipe2, drinkRecipe3),
                 ImageIO.read(new File("images/DrinksCategory.jpg")), ImageIO.read(new File("images/DrinksCategory.jpg")));
-        javax.swing.SwingUtilities.invokeLater(() -> {
+
+        invokeLater(() -> {
+            setCurrentRecipe(0);
+            setCurrentCategory(0);
+            getCategories().add(firstCategory);
+            getCategories().add(secondCategory);
+            getCategories().add(thirdCategory);
             try {
-                setCurrentRecipe(0);
-                setCurrentCategory(0);
-                getCategories().add(firstCategory);
-                getCategories().add(secondCategory);
-                getCategories().add(thirdCategory);
+                setMenuDisplay(new MenuDisplay());
+                setRecDisplay(new RecipeDisplay(recipe1));
                 setCatDisplay(new CategoryDisplay(getCategories().get(0)));
                 getCatDisplay().createAndShowGUI();
                 getRecDisplay().createAndShowGUI();
@@ -127,51 +148,47 @@ public class CookBook {
         });
     }
 
-    static Integer getCurrentCategory () {
+    public static Integer getCurrentCategory () {
         return currentCategory;
     }
 
-    static void setCurrentCategory (Integer currentCategory) {
+    public static void setCurrentCategory (Integer currentCategory) {
         CookBook.currentCategory = currentCategory;
     }
 
-    static Integer getCurrentRecipe () {
+    public static Integer getCurrentRecipe () {
         return currentRecipe;
     }
 
-    static void setCurrentRecipe (Integer currentRecipe) {
+    public static void setCurrentRecipe (Integer currentRecipe) {
         CookBook.currentRecipe = currentRecipe;
     }
 
-    static List<Category> getCategories () {
+    public static List<Category> getCategories () {
         return categories;
     }
 
-    public static void setCategories (List<Category> categories) {
-        CookBook.categories = categories;
-    }
-
-    static RecipeDisplay getRecDisplay () {
+    public static RecipeDisplay getRecDisplay () {
         return recDisplay;
     }
 
-    static void setRecDisplay (RecipeDisplay recDisplay) {
+    private static void setRecDisplay (RecipeDisplay recDisplay) {
         CookBook.recDisplay = recDisplay;
     }
 
-    static CategoryDisplay getCatDisplay () {
+    public static CategoryDisplay getCatDisplay () {
         return catDisplay;
     }
 
-    static void setCatDisplay (CategoryDisplay catDisplay) {
+    private static void setCatDisplay (CategoryDisplay catDisplay) {
         CookBook.catDisplay = catDisplay;
     }
 
-    static MenuDisplay getMenuDisplay () {
+    public static MenuDisplay getMenuDisplay () {
         return menuDisplay;
     }
 
-    static void setMenuDisplay (MenuDisplay menuDisplay) {
+    private static void setMenuDisplay (MenuDisplay menuDisplay) {
         CookBook.menuDisplay = menuDisplay;
     }
 }

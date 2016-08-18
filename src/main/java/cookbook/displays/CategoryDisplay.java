@@ -1,3 +1,7 @@
+package cookbook.displays;
+
+import cookbook.CookBook;
+import cookbook.model.Category;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -6,14 +10,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-class CategoryDisplay extends JFrame {
+public class CategoryDisplay extends JFrame {
 
     private Category category;
     private JFrame catDisplay;
     private JPanel recPanel;
     private ArrayList<JButton> buttonList;
 
-    CategoryDisplay (Category category) throws IOException {
+    public CategoryDisplay (Category category) throws IOException {
         this.category = category;
 
         catDisplay = new JFrame("CookBook");
@@ -47,7 +51,7 @@ class CategoryDisplay extends JFrame {
 
     }
 
-    public void updateAllComponents () {
+    void updateAllComponents () {
         this.category = CookBook.getCategories().get(CookBook.getCurrentCategory());
 
         CookBook.getCatDisplay().recPanel.removeAll();
@@ -56,14 +60,14 @@ class CategoryDisplay extends JFrame {
         } catch(IOException e) {
             e.printStackTrace();
         }
-
     }
 
+    @Override
     public void setVisible (boolean b) {
         catDisplay.setVisible(b);
     }
 
-    void createAndShowGUI () throws IOException {
+    public void createAndShowGUI () throws IOException {
 
         ImageIcon categoryPicture = new ImageIcon(category.getCategoryImage());
         JLabel picLabel = new JLabel(categoryPicture);

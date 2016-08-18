@@ -1,28 +1,30 @@
+package cookbook.model;
+
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-class Category {
+public class Category {
     private String title;
     private List<Recipe> recipeList;
     private BufferedImage categoryImage;
     private BufferedImage categoryMiniature;
 
-    Category (String title, List<Recipe> recipeList, BufferedImage categoryImage, BufferedImage categoryMiniature) {
+    public Category (String title, List<Recipe> recipeList, BufferedImage categoryImage, BufferedImage categoryMiniature) {
         this.title = title;
         this.recipeList = recipeList;
         this.categoryImage = categoryImage;
         this.categoryMiniature = categoryMiniature;
     }
 
-    String getTitle () {
+    public String getTitle () {
         return title;
     }
 
-    List<Recipe> getRecipeList () {
+    public List<Recipe> getRecipeList () {
         return recipeList;
     }
 
-    BufferedImage getCategoryImage () {
+    public BufferedImage getCategoryImage () {
         return categoryImage;
     }
 

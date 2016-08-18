@@ -1,7 +1,9 @@
+package cookbook.model;
+
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-class Recipe {
+public class Recipe {
     private String title;
     private String description;
     private List<Ingredient> ingredientList;
@@ -9,7 +11,7 @@ class Recipe {
     private BufferedImage miniature;
     private int numberOfPeople;
 
-    Recipe (String title, String description, List<Ingredient> ingredientList, BufferedImage image, BufferedImage miniature, int numberOfPeople) {
+    public Recipe (String title, String description, List<Ingredient> ingredientList, BufferedImage image, BufferedImage miniature, int numberOfPeople) {
         this.title = title;
         this.description = description;
         this.ingredientList = ingredientList;
@@ -18,19 +20,19 @@ class Recipe {
         this.numberOfPeople = numberOfPeople;
     }
 
-    String getTitle () {
+    public String getTitle () {
         return title;
     }
 
-    String getDescription () {
+    public String getDescription () {
         return description;
     }
 
-    List<Ingredient> getIngredientList () {
+    public List<Ingredient> getIngredientList () {
         return ingredientList;
     }
 
-    BufferedImage getImage () {
+    public BufferedImage getImage () {
         return image;
     }
 
@@ -38,7 +40,7 @@ class Recipe {
         return miniature;
     }
 
-    int getNumberOfPeople () {
+    public int getNumberOfPeople () {
         return numberOfPeople;
     }
 }

@@ -1,3 +1,8 @@
+package cookbook.displays;
+
+import cookbook.CookBook;
+import cookbook.model.Ingredient;
+import cookbook.model.Recipe;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -6,7 +11,7 @@ import java.io.IOException;
 import java.util.stream.Collectors;
 
 
-class RecipeDisplay extends JFrame {
+public class RecipeDisplay extends JFrame {
 
     private Recipe recipe;
     private JFrame recDisplay;
@@ -20,7 +25,7 @@ class RecipeDisplay extends JFrame {
     private JTextArea recipeDescription;
     private JLabel recipeTitle;
 
-    RecipeDisplay (Recipe recipe) throws IOException {
+    public RecipeDisplay (Recipe recipe) throws IOException {
         this.recipe = recipe;
 
         recDisplay = new JFrame("CookBook");
@@ -59,27 +64,27 @@ class RecipeDisplay extends JFrame {
     }
 
 
-    public void updateAllComponents () {
+    void updateAllComponents () {
         this.recipe = CookBook.getCategories().get(CookBook.getCurrentCategory())
                 .getRecipeList().get(CookBook.getCurrentRecipe());
         currentNumberOfPeople = recipe.getNumberOfPeople();
         numberOfPeople.setText("People:" + currentNumberOfPeople);
-        recipe.getIngredientList().stream().forEach(i -> i.reScale(currentNumberOfPeople));
-        ingredientStringsJList.setListData((recipe.getIngredientList()
-                .stream().map(Ingredient::toString).collect(Collectors.toList()).toArray()));
+        recipe.getIngredientList().forEach(i -> i.reScale(currentNumberOfPeople));
+        ingredientStringsJList.setListData(recipe.getIngredientList()
+                .stream().map(Ingredient::toString).collect(Collectors.toList()).toArray());
         recipeDescription.setText(recipe.getDescription());
         recipeTitle.setText("Recipe:     " + recipe.getTitle());
         recipePicture.setImage(recipe.getImage());
         picLabel.setIcon(recipePicture);
         picLabel.repaint();
-
     }
 
+    @Override
     public void setVisible (boolean b) {
         recDisplay.setVisible(b);
     }
 
-    void createAndShowGUI () throws IOException {
+    public void createAndShowGUI () throws IOException {
 
         recDisplay.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,7 +140,7 @@ class RecipeDisplay extends JFrame {
 
         listModel = new DefaultListModel<>();
         recipe.getIngredientList().forEach(i -> i.reScale(currentNumberOfPeople));
-        recipe.getIngredientList().forEach(i -> listModel.addElement(i));
+        recipe.getIngredientList().forEach(listModel::addElement);
 
         ingredientStringsJList = new JList<>(listModel);
         ingredientStringsJList.setPreferredSize(new Dimension(200, 500));
