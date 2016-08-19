@@ -7,115 +7,121 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class CategoryDisplay extends CookBookDisplay {
 
+    private static final Logger LOGGER = Logger.getLogger( CategoryDisplay.class.getName() );
     private Category category;
-    private JFrame catDisplay;
+    private JFrame categoryFrame;
     private JPanel recPanel;
-    private ArrayList<JButton> buttonList;
+    private Map<String, Runnable> actions;
 
     public CategoryDisplay (Category category) throws IOException {
         this.category = category;
 
-        catDisplay = new JFrame("CookBook");
+        categoryFrame = new JFrame("CookBook");
         recPanel = new JPanel(new MigLayout());
-        catDisplay.pack();
+        categoryFrame.pack();
+        actions = new HashMap<>();
+        actions.put("Back", this::previousPage);
+        actions.put("Next", this::nextPage);
+        actions.put("Home", this::returnToHome);
     }
 
     public void setVisible (boolean b) {
-        catDisplay.setVisible(b);
+        categoryFrame.setVisible(b);
+    }
+
+    private void hideCatDisplay () {
+        CookBook.getCatDisplay().setVisible(false);
+        CookBook.getCatDisplay().removeAll();
     }
 
     private void previousPage () {
         if (CookBook.getCurrentCategory() == 0) {
-            CookBook.getCatDisplay().setVisible(false);
-            CookBook.getCatDisplay().removeAll();
-            CookBook.getCatDisplay().dispose();
+            hideCatDisplay();
             CookBook.getMenuDisplay().setVisible(true);
         } else {
             CookBook.setCurrentCategory(CookBook.getCurrentCategory() - 1);
-            CookBook.setCurrentRecipe(CookBook.getCategories().get(CookBook.getCurrentCategory()).getRecipeList().size() - 1);
-            CookBook.getCatDisplay().setVisible(false);
-            CookBook.getCatDisplay().removeAll();
+            CookBook.setCurrentRecipe(CookBook.getCategories()
+                    .get(CookBook.getCurrentCategory()).getRecipeList().size() - 1);
+            hideCatDisplay();
             CookBook.getRecDisplay().updateAllComponents();
             CookBook.getRecDisplay().setVisible(true);
         }
     }
 
     private void nextPage () {
-        CookBook.getCatDisplay().setVisible(false);
-        CookBook.getCatDisplay().dispose();
+        hideCatDisplay();
         CookBook.setCurrentRecipe(0);
         CookBook.getRecDisplay().updateAllComponents();
         CookBook.getRecDisplay().setVisible(true);
+    }
 
+    private void returnToHome () {
+        hideCatDisplay();
+        CookBook.setCurrentCategory(0);
+        CookBook.setCurrentRecipe(0);
+        CookBook.getMenuDisplay().setVisible(true);
     }
 
     void updateAllComponents () {
         this.category = CookBook.getCategories().get(CookBook.getCurrentCategory());
-
         CookBook.getCatDisplay().recPanel.removeAll();
         try {
             CookBook.getCatDisplay().createAndShowGUI();
         } catch(IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "An IOException has occured", e);
         }
+    }
+
+    private JButton createButtonWithProperties (String title, int width, int height) {
+        JButton button = new JButton(title);
+        button.addActionListener(e -> actions.get(title).run());
+        button.setPreferredSize(new Dimension(width, height));
+        return button;
     }
 
     public void createAndShowGUI () throws IOException {
 
-        ImageIcon categoryPicture = new ImageIcon(category.getCategoryImage());
-        JLabel picLabel = new JLabel(categoryPicture);
-        catDisplay.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        buttonList = new ArrayList<>();
+        JLabel picLabel = new JLabel(new ImageIcon(category.getCategoryImage()));
+        categoryFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
         JLabel catTitle = new JLabel("Category:     " + category.getTitle());
         catTitle.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
         catTitle.setFont(new Font(null, Font.PLAIN, 18));
 
+        JButton previousPage = createButtonWithProperties("Back", 98, 50);
+        JButton nextPage = createButtonWithProperties("Next", 98, 50);
+        JButton home = createButtonWithProperties("Home", 200, 50);
 
-        JButton previousPage = new JButton("Back");
-        previousPage.addActionListener(e -> previousPage());
-        JButton nextPage = new JButton("Next");
-        nextPage.addActionListener(e -> nextPage());
-        JButton home = new JButton("Home");
-
-
-        previousPage.setPreferredSize(new Dimension(100, 50));
-        nextPage.setPreferredSize(new Dimension(100, 50));
-        home.setPreferredSize(new Dimension(200, 50));
-        home.addActionListener(e -> {
-            CookBook.getCatDisplay().setVisible(false);
-            recPanel.removeAll();
-            CookBook.setCurrentCategory(0);
-            CookBook.setCurrentRecipe(0);
-            CookBook.getMenuDisplay().setVisible(true);
-        });
         recPanel.add(picLabel, "span 1 9");
         recPanel.add(catTitle, "wrap");
         recPanel.add(home, "wrap");
         recPanel.add(previousPage, "split");
         recPanel.add(nextPage, "wrap");
+
         category.getRecipeList().forEach(e -> {
-            JButton b = new JButton(e.getTitle());
-            b.setPreferredSize(new Dimension(200, 50));
-            b.addActionListener(a -> {
-                buttonList.add(b);
+            JButton button = new JButton(e.getTitle());
+            button.setPreferredSize(new Dimension(200, 50));
+            button.addActionListener(a -> {
                 CookBook.setCurrentRecipe(category.getRecipeList().indexOf(e));
                 CookBook.getRecDisplay().updateAllComponents();
                 CookBook.getRecDisplay().setVisible(true);
                 CookBook.getCatDisplay().setVisible(false);
-                catDisplay.dispose();
             });
-            recPanel.add(b, "wrap");
+            recPanel.add(button, "wrap");
         });
         recPanel.setPreferredSize(new Dimension(1300, 900));
-        catDisplay.getContentPane().add(recPanel);
-        catDisplay.pack();
-        catDisplay.setResizable(false);
-        catDisplay.setLocationRelativeTo(null);
-        catDisplay.setVisible(false);
+        categoryFrame.getContentPane().add(recPanel);
+        categoryFrame.pack();
+        categoryFrame.setResizable(false);
+        categoryFrame.setLocationRelativeTo(null);
+        categoryFrame.setVisible(false);
     }
 }

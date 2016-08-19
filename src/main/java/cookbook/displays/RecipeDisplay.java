@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class RecipeDisplay extends CookBookDisplay {
 
     private Recipe recipe;
-    private JFrame recDisplay;
+    private JFrame recipeFrame;
     private JPanel recPanel;
     private JLabel picLabel;
     private JLabel numberOfPeople;
@@ -28,16 +28,16 @@ public class RecipeDisplay extends CookBookDisplay {
     public RecipeDisplay (Recipe recipe) throws IOException {
         this.recipe = recipe;
 
-        recDisplay = new JFrame("CookBook");
+        recipeFrame = new JFrame("CookBook");
         recPanel = new JPanel(new MigLayout());
         recipePicture = new ImageIcon(recipe.getImage());
         picLabel = new JLabel(recipePicture);
-        recDisplay.pack();
+        recipeFrame.pack();
         currentNumberOfPeople = recipe.getNumberOfPeople();
     }
 
     public void setVisible (boolean b) {
-        recDisplay.setVisible(b);
+        recipeFrame.setVisible(b);
     }
 
     private void previousPage () {
@@ -84,7 +84,7 @@ public class RecipeDisplay extends CookBookDisplay {
 
     public void createAndShowGUI () throws IOException {
 
-        recDisplay.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        recipeFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         recipeTitle = new JLabel("Recipe:     " + recipe.getTitle());
         recipeTitle.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
@@ -104,7 +104,7 @@ public class RecipeDisplay extends CookBookDisplay {
         JButton home = new JButton("Home");
         home.addActionListener(e -> {
             CookBook.getRecDisplay().setVisible(false);
-            recDisplay.dispose();
+            recipeFrame.dispose();
             CookBook.setCurrentCategory(0);
             CookBook.setCurrentRecipe(0);
             updateAllComponents();
@@ -160,11 +160,11 @@ public class RecipeDisplay extends CookBookDisplay {
         recPanel.add(previousPage, "split");
         recPanel.add(nextPage, "wrap");
         recPanel.setPreferredSize(new Dimension(1300, 900));
-        recDisplay.getContentPane().add(recPanel);
+        recipeFrame.getContentPane().add(recPanel);
 
-        recDisplay.pack();
-        recDisplay.setResizable(false);
-        recDisplay.setLocationRelativeTo(null);
-        recDisplay.setVisible(false);
+        recipeFrame.pack();
+        recipeFrame.setResizable(false);
+        recipeFrame.setLocationRelativeTo(null);
+        recipeFrame.setVisible(false);
     }
 }

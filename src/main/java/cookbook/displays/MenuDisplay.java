@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class MenuDisplay extends CookBookDisplay {
 
-    private JFrame menuDisplay;
+    private JFrame menuFrame;
     private JPanel recPanel;
     private JLabel picLabel;
 
@@ -23,11 +23,11 @@ public class MenuDisplay extends CookBookDisplay {
     }
 
     public void setVisible (boolean b) {
-        menuDisplay.setVisible(b);
+        menuFrame.setVisible(b);
     }
 
     private void nextPageFunction () {
-        menuDisplay.setVisible(false);
+        menuFrame.setVisible(false);
         CookBook.setCurrentCategory(0);
 
         CookBook.getCatDisplay().updateAllComponents();
@@ -38,7 +38,7 @@ public class MenuDisplay extends CookBookDisplay {
 
     public void createAndShowGUI () throws IOException {
 
-        menuDisplay = new JFrame("CookBook- Welcome!");
+        menuFrame = new JFrame("CookBook- Welcome!");
         recPanel = new JPanel(new MigLayout());
         recPanel.add(picLabel, "span 1 5");
         JButton nextPage = new JButton("Next");
@@ -65,11 +65,11 @@ public class MenuDisplay extends CookBookDisplay {
 
         recPanel.setPreferredSize(new Dimension(1300, 900));
         CookBook.getRecDisplay().setVisible(false);
-        menuDisplay.getContentPane().add(recPanel);
-        menuDisplay.pack();
-        menuDisplay.setResizable(false);
-        menuDisplay.setLocationRelativeTo(null);
-        menuDisplay.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        menuDisplay.setVisible(true);
+        menuFrame.getContentPane().add(recPanel);
+        menuFrame.pack();
+        menuFrame.setResizable(false);
+        menuFrame.setLocationRelativeTo(null);
+        menuFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        menuFrame.setVisible(true);
     }
 }
