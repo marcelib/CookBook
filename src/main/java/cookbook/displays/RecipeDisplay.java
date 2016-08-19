@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.stream.Collectors;
 
 
-public class RecipeDisplay extends JFrame {
+public class RecipeDisplay extends CookBookDisplay {
 
     private Recipe recipe;
     private JFrame recDisplay;
@@ -36,6 +36,9 @@ public class RecipeDisplay extends JFrame {
         currentNumberOfPeople = recipe.getNumberOfPeople();
     }
 
+    public void setVisible (boolean b) {
+        recDisplay.setVisible(b);
+    }
 
     private void previousPage () {
         if (CookBook.getCurrentRecipe() > 0) {
@@ -77,11 +80,6 @@ public class RecipeDisplay extends JFrame {
         recipePicture.setImage(recipe.getImage());
         picLabel.setIcon(recipePicture);
         picLabel.repaint();
-    }
-
-    @Override
-    public void setVisible (boolean b) {
-        recDisplay.setVisible(b);
     }
 
     public void createAndShowGUI () throws IOException {

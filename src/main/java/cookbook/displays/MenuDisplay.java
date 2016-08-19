@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class MenuDisplay extends JFrame {
+public class MenuDisplay extends CookBookDisplay {
 
     private JFrame menuDisplay;
     private JPanel recPanel;
@@ -22,7 +22,6 @@ public class MenuDisplay extends JFrame {
         picLabel.setIcon(new ImageIcon(ImageIO.read(new File("images/StartPage.jpeg"))));
     }
 
-    @Override
     public void setVisible (boolean b) {
         menuDisplay.setVisible(b);
     }

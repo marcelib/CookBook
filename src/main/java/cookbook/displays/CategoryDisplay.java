@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class CategoryDisplay extends JFrame {
+public class CategoryDisplay extends CookBookDisplay {
 
     private Category category;
     private JFrame catDisplay;
@@ -25,6 +25,9 @@ public class CategoryDisplay extends JFrame {
         catDisplay.pack();
     }
 
+    public void setVisible (boolean b) {
+        catDisplay.setVisible(b);
+    }
 
     private void previousPage () {
         if (CookBook.getCurrentCategory() == 0) {
@@ -60,11 +63,6 @@ public class CategoryDisplay extends JFrame {
         } catch(IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void setVisible (boolean b) {
-        catDisplay.setVisible(b);
     }
 
     public void createAndShowGUI () throws IOException {
