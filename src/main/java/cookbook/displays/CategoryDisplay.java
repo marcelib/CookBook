@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 public class CategoryDisplay extends CookBookDisplay {
 
-    private static final Logger LOGGER = Logger.getLogger( CategoryDisplay.class.getName() );
+    private static final Logger LOGGER = Logger.getLogger(CategoryDisplay.class.getName());
     private Category category;
     private JFrame categoryFrame;
     private JPanel recPanel;
@@ -33,16 +33,21 @@ public class CategoryDisplay extends CookBookDisplay {
         actions.put("Home", this::returnToHome);
     }
 
+    @Override
     public void setVisible (boolean b) {
         categoryFrame.setVisible(b);
     }
 
-    private void hideCatDisplay () {
-        CookBook.getCatDisplay().setVisible(false);
-        CookBook.getCatDisplay().removeAll();
+    @Override
+    public void nextPage () {
+        hideCatDisplay();
+        CookBook.setCurrentRecipe(0);
+        CookBook.getRecDisplay().updateAllComponents();
+        CookBook.getRecDisplay().setVisible(true);
     }
 
-    private void previousPage () {
+    @Override
+    public void previousPage () {
         if (CookBook.getCurrentCategory() == 0) {
             hideCatDisplay();
             CookBook.getMenuDisplay().setVisible(true);
@@ -56,11 +61,9 @@ public class CategoryDisplay extends CookBookDisplay {
         }
     }
 
-    private void nextPage () {
-        hideCatDisplay();
-        CookBook.setCurrentRecipe(0);
-        CookBook.getRecDisplay().updateAllComponents();
-        CookBook.getRecDisplay().setVisible(true);
+    private void hideCatDisplay () {
+        CookBook.getCatDisplay().setVisible(false);
+        CookBook.getCatDisplay().removeAll();
     }
 
     private void returnToHome () {
@@ -68,6 +71,13 @@ public class CategoryDisplay extends CookBookDisplay {
         CookBook.setCurrentCategory(0);
         CookBook.setCurrentRecipe(0);
         CookBook.getMenuDisplay().setVisible(true);
+    }
+
+    private JButton createButtonWithProperties (String title, int width, int height) {
+        JButton button = new JButton(title);
+        button.addActionListener(e -> actions.get(title).run());
+        button.setPreferredSize(new Dimension(width, height));
+        return button;
     }
 
     void updateAllComponents () {
@@ -78,13 +88,6 @@ public class CategoryDisplay extends CookBookDisplay {
         } catch(IOException e) {
             LOGGER.log(Level.SEVERE, "An IOException has occured", e);
         }
-    }
-
-    private JButton createButtonWithProperties (String title, int width, int height) {
-        JButton button = new JButton(title);
-        button.addActionListener(e -> actions.get(title).run());
-        button.setPreferredSize(new Dimension(width, height));
-        return button;
     }
 
     public void createAndShowGUI () throws IOException {

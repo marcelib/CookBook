@@ -13,7 +13,6 @@ import java.io.IOException;
 public class MenuDisplay extends CookBookDisplay {
 
     private JFrame menuFrame;
-    private JPanel recPanel;
     private JLabel picLabel;
 
 
@@ -22,11 +21,13 @@ public class MenuDisplay extends CookBookDisplay {
         picLabel.setIcon(new ImageIcon(ImageIO.read(new File("images/StartPage.jpeg"))));
     }
 
+    @Override
     public void setVisible (boolean b) {
         menuFrame.setVisible(b);
     }
 
-    private void nextPageFunction () {
+    @Override
+    public void nextPage () {
         menuFrame.setVisible(false);
         CookBook.setCurrentCategory(0);
 
@@ -39,12 +40,12 @@ public class MenuDisplay extends CookBookDisplay {
     public void createAndShowGUI () throws IOException {
 
         menuFrame = new JFrame("CookBook- Welcome!");
-        recPanel = new JPanel(new MigLayout());
+        JPanel recPanel = new JPanel(new MigLayout());
         recPanel.add(picLabel, "span 1 5");
         JButton nextPage = new JButton("Next");
         nextPage.setPreferredSize(new Dimension(150, 100));
         nextPage.setFont(new Font(null, Font.PLAIN, 18));
-        nextPage.addActionListener(e -> nextPageFunction());
+        nextPage.addActionListener(e -> nextPage());
         recPanel.add(nextPage, "wrap");
         CookBook.getCategories().forEach(c -> {
             JButton b = new JButton(c.getTitle());

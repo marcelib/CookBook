@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 
 public class RecipeDisplay extends CookBookDisplay {
 
+    private static final String PEOPLE = "People:";
+    private static final String SPLIT = "split";
+    private static final String WRAP = "wrap";
     private Recipe recipe;
     private JFrame recipeFrame;
     private JPanel recPanel;
@@ -20,7 +23,6 @@ public class RecipeDisplay extends CookBookDisplay {
     private JLabel numberOfPeople;
     private int currentNumberOfPeople;
     private JList<Object> ingredientStringsJList;
-    private DefaultListModel<Object> listModel;
     private ImageIcon recipePicture;
     private JTextArea recipeDescription;
     private JLabel recipeTitle;
@@ -36,24 +38,13 @@ public class RecipeDisplay extends CookBookDisplay {
         currentNumberOfPeople = recipe.getNumberOfPeople();
     }
 
+    @Override
     public void setVisible (boolean b) {
         recipeFrame.setVisible(b);
     }
 
-    private void previousPage () {
-        if (CookBook.getCurrentRecipe() > 0) {
-            CookBook.setCurrentRecipe(CookBook.getCurrentRecipe() - 1);
-            updateAllComponents();
-        } else {
-            CookBook.getRecDisplay().setVisible(false);
-            CookBook.getCatDisplay().updateAllComponents();
-            CookBook.getCatDisplay().setVisible(true);
-            CookBook.getCatDisplay().setLocationRelativeTo(null);
-
-        }
-    }
-
-    private void nextPage () {
+    @Override
+    public void nextPage () {
         if (CookBook.getCategories().get(CookBook.getCurrentCategory()).getRecipeList().size() > CookBook.getCurrentRecipe() + 1) {
             CookBook.setCurrentRecipe(CookBook.getCurrentRecipe() + 1);
             updateAllComponents();
@@ -66,12 +57,25 @@ public class RecipeDisplay extends CookBookDisplay {
         }
     }
 
+    @Override
+    public void previousPage () {
+        if (CookBook.getCurrentRecipe() > 0) {
+            CookBook.setCurrentRecipe(CookBook.getCurrentRecipe() - 1);
+            updateAllComponents();
+        } else {
+            CookBook.getRecDisplay().setVisible(false);
+            CookBook.getCatDisplay().updateAllComponents();
+            CookBook.getCatDisplay().setVisible(true);
+            CookBook.getCatDisplay().setLocationRelativeTo(null);
+
+        }
+    }
 
     void updateAllComponents () {
         this.recipe = CookBook.getCategories().get(CookBook.getCurrentCategory())
                 .getRecipeList().get(CookBook.getCurrentRecipe());
         currentNumberOfPeople = recipe.getNumberOfPeople();
-        numberOfPeople.setText("People:" + currentNumberOfPeople);
+        numberOfPeople.setText(PEOPLE + currentNumberOfPeople);
         recipe.getIngredientList().forEach(i -> i.reScale(currentNumberOfPeople));
         ingredientStringsJList.setListData(recipe.getIngredientList()
                 .stream().map(Ingredient::toString).collect(Collectors.toList()).toArray());
@@ -94,7 +98,7 @@ public class RecipeDisplay extends CookBookDisplay {
 
         recipeDescription.setEditable(false);
         recipeDescription.setPreferredSize(new Dimension(400, 100));
-        numberOfPeople = new JLabel("People:" + currentNumberOfPeople);
+        numberOfPeople = new JLabel(PEOPLE + currentNumberOfPeople);
         numberOfPeople.setPreferredSize(new Dimension(100, 50));
 
         JButton previousPage = new JButton("Back");
@@ -114,7 +118,7 @@ public class RecipeDisplay extends CookBookDisplay {
 
         upScale.addActionListener(e -> {
             currentNumberOfPeople++;
-            numberOfPeople.setText("People:" + currentNumberOfPeople);
+            numberOfPeople.setText(PEOPLE + currentNumberOfPeople);
             recipe.getIngredientList().forEach(i -> i.reScale(currentNumberOfPeople));
             ingredientStringsJList.setListData(recipe.getIngredientList()
                     .stream().map(Ingredient::toString).collect(Collectors.toList()).toArray());
@@ -123,7 +127,7 @@ public class RecipeDisplay extends CookBookDisplay {
         downScale.addActionListener(e -> {
             if (currentNumberOfPeople > 1) {
                 currentNumberOfPeople--;
-                numberOfPeople.setText("People:" + currentNumberOfPeople);
+                numberOfPeople.setText(PEOPLE + currentNumberOfPeople);
                 recipe.getIngredientList().forEach(i -> i.reScale(currentNumberOfPeople));
                 ingredientStringsJList.setListData(recipe.getIngredientList()
                         .stream().map(Ingredient::toString).collect(Collectors.toList()).toArray());
@@ -136,7 +140,7 @@ public class RecipeDisplay extends CookBookDisplay {
         nextPage.setPreferredSize(new Dimension(100, 50));
         home.setPreferredSize(new Dimension(200, 50));
 
-        listModel = new DefaultListModel<>();
+        DefaultListModel<Object> listModel = new DefaultListModel<>();
         recipe.getIngredientList().forEach(i -> i.reScale(currentNumberOfPeople));
         recipe.getIngredientList().forEach(listModel::addElement);
 
@@ -150,15 +154,15 @@ public class RecipeDisplay extends CookBookDisplay {
         numberOfPeople.setFont(new Font(null, Font.PLAIN, 18));
 
         recPanel.add(picLabel, "span 1 9");
-        recPanel.add(numberOfPeople, "split");
-        recPanel.add(downScale, "split");
-        recPanel.add(upScale, "wrap");
-        recPanel.add(ingredientStringsJList, "wrap");
+        recPanel.add(numberOfPeople, SPLIT);
+        recPanel.add(downScale, SPLIT);
+        recPanel.add(upScale, WRAP);
+        recPanel.add(ingredientStringsJList, WRAP);
         recPanel.add(recipeDescription, "dock south");
-        recPanel.add(recipeTitle, "wrap");
-        recPanel.add(home, "wrap");
-        recPanel.add(previousPage, "split");
-        recPanel.add(nextPage, "wrap");
+        recPanel.add(recipeTitle, WRAP);
+        recPanel.add(home, WRAP);
+        recPanel.add(previousPage, SPLIT);
+        recPanel.add(nextPage, WRAP);
         recPanel.setPreferredSize(new Dimension(1300, 900));
         recipeFrame.getContentPane().add(recPanel);
 
