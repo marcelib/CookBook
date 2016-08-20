@@ -10,7 +10,6 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
-
 public class RecipeDisplay extends CookBookDisplay {
 
     private static final String PEOPLE = "People:";
@@ -34,7 +33,6 @@ public class RecipeDisplay extends CookBookDisplay {
         recPanel = new JPanel(new MigLayout());
         recipePicture = new ImageIcon(recipe.getImage());
         picLabel = new JLabel(recipePicture);
-        recipeFrame.pack();
         currentNumberOfPeople = recipe.getNumberOfPeople();
     }
 
@@ -44,31 +42,31 @@ public class RecipeDisplay extends CookBookDisplay {
     }
 
     @Override
-    public void nextPage () {
+    void nextPage () {
         if (CookBook.getCategories().get(CookBook.getCurrentCategory()).getRecipeList().size() > CookBook.getCurrentRecipe() + 1) {
             CookBook.setCurrentRecipe(CookBook.getCurrentRecipe() + 1);
             updateAllComponents();
         } else if (CookBook.getCategories().size() > CookBook.getCurrentCategory() + 1) {
             CookBook.setCurrentCategory(CookBook.getCurrentCategory() + 1);
             CookBook.setCurrentRecipe(0);
-            CookBook.getCatDisplay().updateAllComponents();
-            CookBook.getCatDisplay().setVisible(true);
-            CookBook.getRecDisplay().setVisible(false);
+            showCatDisplay();
         }
     }
 
     @Override
-    public void previousPage () {
+    void previousPage () {
         if (CookBook.getCurrentRecipe() > 0) {
             CookBook.setCurrentRecipe(CookBook.getCurrentRecipe() - 1);
             updateAllComponents();
         } else {
-            CookBook.getRecDisplay().setVisible(false);
-            CookBook.getCatDisplay().updateAllComponents();
-            CookBook.getCatDisplay().setVisible(true);
-            CookBook.getCatDisplay().setLocationRelativeTo(null);
-
+            hideCurrentDisplay();
+            showCatDisplay();
         }
+    }
+
+    @Override
+    void hideCurrentDisplay () {
+        CookBook.getRecDisplay().setVisible(false);
     }
 
     void updateAllComponents () {
@@ -95,7 +93,6 @@ public class RecipeDisplay extends CookBookDisplay {
 
         recipeDescription = new JTextArea(recipe.getDescription());
 
-
         recipeDescription.setEditable(false);
         recipeDescription.setPreferredSize(new Dimension(400, 100));
         numberOfPeople = new JLabel(PEOPLE + currentNumberOfPeople);
@@ -114,8 +111,8 @@ public class RecipeDisplay extends CookBookDisplay {
             updateAllComponents();
             CookBook.getMenuDisplay().setVisible(true);
         });
-        JButton upScale = new JButton("+");
 
+        JButton upScale = new JButton("+");
         upScale.addActionListener(e -> {
             currentNumberOfPeople++;
             numberOfPeople.setText(PEOPLE + currentNumberOfPeople);
@@ -123,6 +120,7 @@ public class RecipeDisplay extends CookBookDisplay {
             ingredientStringsJList.setListData(recipe.getIngredientList()
                     .stream().map(Ingredient::toString).collect(Collectors.toList()).toArray());
         });
+
         JButton downScale = new JButton("-");
         downScale.addActionListener(e -> {
             if (currentNumberOfPeople > 1) {

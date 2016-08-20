@@ -15,7 +15,6 @@ public class MenuDisplay extends CookBookDisplay {
     private JFrame menuFrame;
     private JLabel picLabel;
 
-
     public MenuDisplay () throws IOException {
         picLabel = new JLabel();
         picLabel.setIcon(new ImageIcon(ImageIO.read(new File("images/StartPage.jpeg"))));
@@ -27,46 +26,47 @@ public class MenuDisplay extends CookBookDisplay {
     }
 
     @Override
-    public void nextPage () {
+    void hideCurrentDisplay () {
         menuFrame.setVisible(false);
-        CookBook.setCurrentCategory(0);
-
-        CookBook.getCatDisplay().updateAllComponents();
-        CookBook.getCatDisplay().setVisible(true);
-        CookBook.getCatDisplay().setLocationRelativeTo(null);
     }
 
+    @Override
+    void nextPage () {
+        CookBook.setCurrentCategory(0);
+        showCatDisplay();
+        hideCurrentDisplay();
+    }
 
     public void createAndShowGUI () throws IOException {
 
         menuFrame = new JFrame("CookBook- Welcome!");
         JPanel recPanel = new JPanel(new MigLayout());
+
         recPanel.add(picLabel, "span 1 5");
-        JButton nextPage = new JButton("Next");
-        nextPage.setPreferredSize(new Dimension(150, 100));
-        nextPage.setFont(new Font(null, Font.PLAIN, 18));
-        nextPage.addActionListener(e -> nextPage());
-        recPanel.add(nextPage, "wrap");
+        recPanel.add(createButtonWithProperties("Next", 150, 100), "wrap");
+
         CookBook.getCategories().forEach(c -> {
             JButton b = new JButton(c.getTitle());
             b.setPreferredSize(new Dimension(150, 100));
             b.setFont(new Font(null, Font.PLAIN, 18));
             b.addActionListener(e -> {
                 CookBook.setCurrentCategory(CookBook.getCategories().indexOf(c));
-                CookBook.getCatDisplay().updateAllComponents();
-                CookBook.getCatDisplay().setVisible(true);
-                CookBook.getMenuDisplay().setVisible(false);
+                showCatDisplay();
+                hideCurrentDisplay();
             });
             recPanel.add(b, "wrap");
         });
-        JTextArea welcome = new JTextArea("Welcome to the CookBook Application \n" +
+
+        recPanel.add(new JTextArea("Welcome to the CookBook Application \n" +
                 "Created by:\n" +
-                "Marceli Baczewski\n");
-        recPanel.add(welcome, "dock south");
+                "Marceli Baczewski\n"), "dock south");
 
         recPanel.setPreferredSize(new Dimension(1300, 900));
-        CookBook.getRecDisplay().setVisible(false);
         menuFrame.getContentPane().add(recPanel);
+        setFrameProperties();
+    }
+
+    private void setFrameProperties () {
         menuFrame.pack();
         menuFrame.setResizable(false);
         menuFrame.setLocationRelativeTo(null);
