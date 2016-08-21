@@ -9,6 +9,8 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+import static cookbook.displays.DisplayUtils.showCatDisplay;
+
 
 public class MenuDisplay extends CookBookDisplay {
 

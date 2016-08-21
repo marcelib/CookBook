@@ -10,6 +10,8 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
+import static cookbook.displays.DisplayUtils.showCatDisplay;
+
 public class RecipeDisplay extends CookBookDisplay {
 
     private static final String PEOPLE = "People:";

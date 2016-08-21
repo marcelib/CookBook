@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static cookbook.displays.DisplayUtils.showMenuDisplay;
+import static cookbook.displays.DisplayUtils.showRecDisplay;
+
 public class CategoryDisplay extends CookBookDisplay {
 
     private static final Logger LOGGER = Logger.getLogger(CategoryDisplay.class.getName());
