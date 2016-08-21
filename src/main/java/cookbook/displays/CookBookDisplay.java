@@ -29,19 +29,22 @@ abstract class CookBookDisplay extends JFrame {
     abstract void nextPage();
 
     /* not necessarily in child classes */
-    void previousPage() {}
+    void previousPage() {
+    }
 
     /* used in button generation */
     JButton createButtonWithProperties(String title, int width, int height) {
         JButton button = new JButton(title);
-        button.addActionListener(e -> actions.get(title).run());
+        if (actions.containsKey(title)) {
+            button.addActionListener(e -> actions.get(title).run());
+        }
         button.setPreferredSize(new Dimension(width, height));
         return button;
     }
 
     private void returnToHome() {
-        CookBook.setCurrentCategory(0);
-        CookBook.setCurrentRecipe(0);
+        CookBook.setCurrCategory(0);
+        CookBook.setCurrRecipe(0);
         showMenuDisplay();
         hideCurrentDisplay();
     }

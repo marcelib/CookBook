@@ -34,20 +34,20 @@ public class CategoryDisplay extends CookBookDisplay {
 
     @Override
     void nextPage () {
-        CookBook.setCurrentRecipe(0);
+        CookBook.setCurrRecipe(0);
         showRecDisplay();
         hideCurrentDisplay();
     }
 
     @Override
     void previousPage () {
-        if (CookBook.getCurrentCategory() == 0) {
+        if (CookBook.getCurrCategory() == 0) {
             showMenuDisplay();
             hideCurrentDisplay();
         } else {
-            CookBook.setCurrentCategory(CookBook.getCurrentCategory() - 1);
-            CookBook.setCurrentRecipe(CookBook.getCategories()
-                    .get(CookBook.getCurrentCategory()).getRecipeList().size() - 1);
+            CookBook.setCurrCategory(CookBook.getCurrCategory() - 1);
+            CookBook.setCurrRecipe(CookBook.getCategories()
+                    .get(CookBook.getCurrCategory()).getRecList().size() - 1);
             showRecDisplay();
             hideCurrentDisplay();
         }
@@ -60,7 +60,7 @@ public class CategoryDisplay extends CookBookDisplay {
     }
 
     void updateAllComponents (){
-        this.category = CookBook.getCategories().get(CookBook.getCurrentCategory());
+        this.category = CookBook.getCategories().get(CookBook.getCurrCategory());
         CookBook.getCatDisplay().recPanel.removeAll();
         try {
             CookBook.getCatDisplay().createAndShowGUI();
@@ -71,7 +71,7 @@ public class CategoryDisplay extends CookBookDisplay {
 
     public void createAndShowGUI () throws IOException {
 
-        JLabel picLabel = new JLabel(new ImageIcon(category.getCategoryImage()));
+        JLabel picLabel = new JLabel(new ImageIcon(category.getCatImage()));
         JLabel catTitle = new JLabel("Category:     " + category.getTitle());
         catTitle.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
         catTitle.setFont(new Font(null, Font.PLAIN, 18));
@@ -82,11 +82,11 @@ public class CategoryDisplay extends CookBookDisplay {
         recPanel.add(createButtonWithProperties("Back", 98, 50), "split");
         recPanel.add(createButtonWithProperties("Next", 98, 50), "wrap");
 
-        category.getRecipeList().forEach(e -> {
+        category.getRecList().forEach(e -> {
             JButton button = new JButton(e.getTitle());
             button.setPreferredSize(new Dimension(200, 50));
             button.addActionListener(a -> {
-                CookBook.setCurrentRecipe(category.getRecipeList().indexOf(e));
+                CookBook.setCurrRecipe(category.getRecList().indexOf(e));
                 showRecDisplay();
                 hideCurrentDisplay();
             });

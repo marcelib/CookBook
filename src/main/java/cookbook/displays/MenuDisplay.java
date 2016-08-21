@@ -34,7 +34,7 @@ public class MenuDisplay extends CookBookDisplay {
 
     @Override
     void nextPage () {
-        CookBook.setCurrentCategory(0);
+        CookBook.setCurrCategory(0);
         showCatDisplay();
         hideCurrentDisplay();
     }
@@ -52,7 +52,7 @@ public class MenuDisplay extends CookBookDisplay {
             b.setPreferredSize(new Dimension(150, 100));
             b.setFont(new Font(null, Font.PLAIN, 18));
             b.addActionListener(e -> {
-                CookBook.setCurrentCategory(CookBook.getCategories().indexOf(c));
+                CookBook.setCurrCategory(CookBook.getCategories().indexOf(c));
                 showCatDisplay();
                 hideCurrentDisplay();
             });

@@ -32,17 +32,17 @@ public class CategoryTest {
 
     @Test
     public void testGetCategoryImage () {
-        assertEquals(576, testCategory.getCategoryImage().getHeight());
-        assertEquals(768, testCategory.getCategoryImage().getWidth());
-        assertEquals(100, testCategory.getCategoryMiniature().getWidth());
-        assertEquals(100, testCategory.getCategoryMiniature().getHeight());
+        assertEquals(576, testCategory.getCatImage().getHeight());
+        assertEquals(768, testCategory.getCatImage().getWidth());
+        assertEquals(100, testCategory.getCatMiniature().getWidth());
+        assertEquals(100, testCategory.getCatMiniature().getHeight());
     }
 
     @Test
     public void testListImage () {
-        assertEquals(576, testCategory.getRecipeList().get(0).getImage().getHeight());
-        assertEquals(768, testCategory.getRecipeList().get(0).getImage().getWidth());
-        assertEquals(100, testCategory.getRecipeList().get(1).getMiniature().getHeight());
-        assertEquals(100, testCategory.getRecipeList().get(1).getMiniature().getWidth());
+        assertEquals(576, testCategory.getRecList().get(0).getImage().getHeight());
+        assertEquals(768, testCategory.getRecList().get(0).getImage().getWidth());
+        assertEquals(100, testCategory.getRecList().get(1).getMiniature().getHeight());
+        assertEquals(100, testCategory.getRecList().get(1).getMiniature().getWidth());
     }
 }

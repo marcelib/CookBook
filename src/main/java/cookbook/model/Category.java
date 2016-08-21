@@ -20,15 +20,15 @@ public class Category {
         return title;
     }
 
-    public List<Recipe> getRecipeList () {
+    public List<Recipe> getRecList() {
         return recipeList;
     }
 
-    public BufferedImage getCategoryImage () {
+    public BufferedImage getCatImage() {
         return categoryImage;
     }
 
-    BufferedImage getCategoryMiniature () {
+    BufferedImage getCatMiniature() {
         return categoryMiniature;
     }
 
