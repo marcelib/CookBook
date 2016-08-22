@@ -1,6 +1,5 @@
 package cookbook.displays;
 
-import cookbook.CookBook;
 import cookbook.model.Category;
 import net.miginfocom.swing.MigLayout;
 
@@ -10,8 +9,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static cookbook.displays.DisplayUtils.showMenuDisplay;
-import static cookbook.displays.DisplayUtils.showRecDisplay;
+import static cookbook.CookBook.*;
+import static cookbook.displays.DisplayUtils.*;
 
 public class CategoryDisplay extends CookBookDisplay {
 
@@ -34,20 +33,20 @@ public class CategoryDisplay extends CookBookDisplay {
 
     @Override
     void nextPage () {
-        CookBook.setCurrRecipe(0);
+        setCurrRecipe(0);
         showRecDisplay();
         hideCurrentDisplay();
     }
 
     @Override
     void previousPage () {
-        if (CookBook.getCurrCategory() == 0) {
+        if (getCurrCategory() == 0) {
             showMenuDisplay();
             hideCurrentDisplay();
         } else {
-            CookBook.setCurrCategory(CookBook.getCurrCategory() - 1);
-            CookBook.setCurrRecipe(CookBook.getCategories()
-                    .get(CookBook.getCurrCategory()).getRecList().size() - 1);
+            setCurrCategory(getCurrCategory() - 1);
+            setCurrRecipe(getCategories()
+                    .get(getCurrCategory()).getRecList().size() - 1);
             showRecDisplay();
             hideCurrentDisplay();
         }
@@ -55,15 +54,15 @@ public class CategoryDisplay extends CookBookDisplay {
 
     @Override
     void hideCurrentDisplay () {
-        CookBook.getCatDisplay().setVisible(false);
-        CookBook.getCatDisplay().removeAll();
+        getCatDisplay().setVisible(false);
+        getCatDisplay().removeAll();
     }
 
-    void updateAllComponents (){
-        this.category = CookBook.getCategories().get(CookBook.getCurrCategory());
-        CookBook.getCatDisplay().recPanel.removeAll();
+    void updateAllComponents () {
+        this.category = getCategories().get(getCurrCategory());
+        getCatDisplay().recPanel.removeAll();
         try {
-            CookBook.getCatDisplay().createAndShowGUI();
+            getCatDisplay().createAndShowGUI();
         } catch(IOException e) {
             LOGGER.log(Level.SEVERE, "An IOException has occurred", e);
         }
@@ -86,22 +85,14 @@ public class CategoryDisplay extends CookBookDisplay {
             JButton button = new JButton(e.getTitle());
             button.setPreferredSize(new Dimension(200, 50));
             button.addActionListener(a -> {
-                CookBook.setCurrRecipe(category.getRecList().indexOf(e));
+                setCurrRecipe(category.getRecList().indexOf(e));
                 showRecDisplay();
                 hideCurrentDisplay();
             });
             recPanel.add(button, "wrap");
         });
-        setFrameProperties();
+        setFrameProperties(categoryFrame, false);
         recPanel.setPreferredSize(new Dimension(1300, 900));
         categoryFrame.getContentPane().add(recPanel);
-    }
-
-    private void setFrameProperties () {
-        categoryFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        categoryFrame.pack();
-        categoryFrame.setResizable(false);
-        categoryFrame.setLocationRelativeTo(null);
-        categoryFrame.setVisible(false);
     }
 }

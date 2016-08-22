@@ -1,12 +1,11 @@
 package cookbook.displays;
 
-import cookbook.CookBook;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import static cookbook.CookBook.*;
 import static cookbook.displays.DisplayUtils.showMenuDisplay;
 
 abstract class CookBookDisplay extends JFrame {
@@ -43,8 +42,8 @@ abstract class CookBookDisplay extends JFrame {
     }
 
     private void returnToHome() {
-        CookBook.setCurrCategory(0);
-        CookBook.setCurrRecipe(0);
+        setCurrCategory(0);
+        setCurrRecipe(0);
         showMenuDisplay();
         hideCurrentDisplay();
     }

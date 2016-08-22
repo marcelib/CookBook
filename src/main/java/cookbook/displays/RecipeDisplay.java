@@ -1,6 +1,5 @@
 package cookbook.displays;
 
-import cookbook.CookBook;
 import cookbook.model.Ingredient;
 import cookbook.model.Recipe;
 import javafx.util.Pair;
@@ -13,10 +12,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import static cookbook.displays.DisplayUtils.showCatDisplay;
+import static cookbook.CookBook.*;
+import static cookbook.displays.DisplayUtils.*;
 
 public class RecipeDisplay extends CookBookDisplay {
 
+    private static final String JLABEL = "JLabel";
     private static final String PEOPLE = "People:";
     private static final String SPLIT = "split";
     private static final String WRAP = "wrap";
@@ -37,7 +38,7 @@ public class RecipeDisplay extends CookBookDisplay {
     private JButton upScale;
     private JButton downScale;
 
-    public RecipeDisplay(Recipe recipe) {
+    public RecipeDisplay (Recipe recipe) {
         this.recipe = recipe;
 
         recipeFrame = new JFrame("CookBook");
@@ -58,26 +59,26 @@ public class RecipeDisplay extends CookBookDisplay {
     }
 
     @Override
-    public void setVisible(boolean b) {
+    public void setVisible (boolean b) {
         recipeFrame.setVisible(b);
     }
 
     @Override
-    void nextPage() {
-        if (CookBook.getCategories().get(CookBook.getCurrCategory()).getRecList().size() > CookBook.getCurrRecipeIndex() + 1) {
-            CookBook.setCurrRecipe(CookBook.getCurrRecipeIndex() + 1);
+    void nextPage () {
+        if (getCategories().get(getCurrCategory()).getRecList().size() > getCurrRecipeIndex() + 1) {
+            setCurrRecipe(getCurrRecipeIndex() + 1);
             updateAllComponents();
-        } else if (CookBook.getCategories().size() > CookBook.getCurrCategory() + 1) {
-            CookBook.setCurrCategory(CookBook.getCurrCategory() + 1);
-            CookBook.setCurrRecipe(0);
+        } else if (getCategories().size() > getCurrCategory() + 1) {
+            setCurrCategory(getCurrCategory() + 1);
+            setCurrRecipe(0);
             showCatDisplay();
         }
     }
 
     @Override
-    void previousPage() {
-        if (CookBook.getCurrRecipeIndex() > 0) {
-            CookBook.setCurrRecipe(CookBook.getCurrRecipeIndex() - 1);
+    void previousPage () {
+        if (getCurrRecipeIndex() > 0) {
+            setCurrRecipe(getCurrRecipeIndex() - 1);
             updateAllComponents();
         } else {
             hideCurrentDisplay();
@@ -86,13 +87,13 @@ public class RecipeDisplay extends CookBookDisplay {
     }
 
     @Override
-    void hideCurrentDisplay() {
-        CookBook.getRecDisplay().setVisible(false);
+    void hideCurrentDisplay () {
+        getRecDisplay().setVisible(false);
     }
 
-    void updateAllComponents() {
-        this.recipe = CookBook.getCategories().get(CookBook.getCurrCategory())
-                .getRecList().get(CookBook.getCurrRecipeIndex());
+    void updateAllComponents () {
+        this.recipe = getCategories().get(getCurrCategory())
+                .getRecList().get(getCurrRecipeIndex());
         currentNumberOfPeople = recipe.getNumberOfPeople();
         numberOfPeople.setText(PEOPLE + currentNumberOfPeople);
         recipe.getIngredientList().forEach(i -> i.reScale(currentNumberOfPeople));
@@ -105,68 +106,44 @@ public class RecipeDisplay extends CookBookDisplay {
         picLabel.repaint();
     }
 
-    public void createAndShowGUI() throws IOException {
-
-        /* text field construction and property setting- recipe title */
-        recipeTitle = new JLabel("Recipe:     " + recipe.getTitle());
-        recipeTitle.setPreferredSize(new Dimension(200, 50));
-        recipeTitle.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
-        recipeTitle.setFont(new Font(null, Font.PLAIN, 18));
-        /* recipe description */
-        recipeDescription = new JTextArea(recipe.getDescription());
-        recipeDescription.setPreferredSize(new Dimension(400, 100));
-        recipeDescription.setFont(new Font(null, Font.PLAIN, 18));
+    public void createAndShowGUI () throws IOException {
+        numberOfPeople = (JLabel) createJComponent(JLABEL, PEOPLE + currentNumberOfPeople, 100, 50);
+        recipeTitle = (JLabel) createJComponent(JLABEL, "Recipe:     " + recipe.getTitle(), 300, 50);
+        recipeDescription = (JTextArea) createJComponent("JTextArea", recipe.getDescription(), 400, 100);
         recipeDescription.setEditable(false);
-        /* current number of people */
-        numberOfPeople = new JLabel(PEOPLE + currentNumberOfPeople);
-        numberOfPeople.setPreferredSize(new Dimension(100, 50));
-        numberOfPeople.setFont(new Font(null, Font.PLAIN, 18));
-        /* ingredient list construction */
         DefaultListModel<Object> listModel = new DefaultListModel<>();
-        recipe.getIngredientList().forEach(i -> i.reScale(currentNumberOfPeople));
-        recipe.getIngredientList().forEach(listModel::addElement);
+        recipe.getIngredientList().forEach(i -> {
+            i.reScale(currentNumberOfPeople);
+            listModel.addElement(i);
+        });
         ingredientStringsJList = new JList<>(listModel);
-        ingredientStringsJList.setFont(new Font(null, Font.PLAIN, 18));
-        ingredientStringsJList.setPreferredSize(new Dimension(200, 500));
-        /*adding objects to the JPanel*/
+        setComponentProperties(ingredientStringsJList, 300, 500);
         pairs.addAll(Arrays.asList(new Pair<>(picLabel, "span 1 9"), new Pair<>(numberOfPeople, SPLIT),
                 new Pair<>(downScale, SPLIT), new Pair<>(upScale, WRAP), new Pair<>(ingredientStringsJList, WRAP),
                 new Pair<>(recipeDescription, "dock south"), new Pair<>(recipeTitle, WRAP), new Pair<>(home, WRAP),
                 new Pair<>(previousPage, SPLIT), new Pair<>(nextPage, WRAP)));
-        addElementsToLabel(pairs);
-        recPanel.setPreferredSize(new Dimension(1300, 900));
-        setFrameProperties();
-    }
-
-    private void addElementsToLabel(ArrayList<Pair<JComponent, String>> pairs) {
         pairs.forEach(e -> recPanel.add(e.getKey(), e.getValue()));
+        recipeFrame.getContentPane().add(recPanel);
+        recPanel.setPreferredSize(new Dimension(1300, 900));
+        setFrameProperties(recipeFrame, false);
     }
 
-    private void upScale() {
+    private void upScale () {
         currentNumberOfPeople++;
         updateList();
     }
 
-    private void downScale() {
+    private void downScale () {
         if (currentNumberOfPeople > 1) {
             currentNumberOfPeople--;
             updateList();
         }
     }
 
-    private void updateList() {
+    private void updateList () {
         numberOfPeople.setText(PEOPLE + currentNumberOfPeople);
         recipe.getIngredientList().forEach(i -> i.reScale(currentNumberOfPeople));
         ingredientStringsJList.setListData(recipe.getIngredientList()
                 .stream().map(Ingredient::toString).collect(Collectors.toList()).toArray());
-    }
-
-    private void setFrameProperties() {
-        recipeFrame.getContentPane().add(recPanel);
-        recipeFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        recipeFrame.pack();
-        recipeFrame.setResizable(false);
-        recipeFrame.setLocationRelativeTo(null);
-        recipeFrame.setVisible(false);
     }
 }
