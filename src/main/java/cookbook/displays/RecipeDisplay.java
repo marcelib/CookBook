@@ -17,7 +17,6 @@ import static cookbook.displays.DisplayUtils.*;
 
 public class RecipeDisplay extends CookBookDisplay {
 
-    private static final String JLABEL = "JLabel";
     private static final String PEOPLE = "People:";
     private static final String SPLIT = "split";
     private static final String WRAP = "wrap";
@@ -40,13 +39,11 @@ public class RecipeDisplay extends CookBookDisplay {
 
     public RecipeDisplay (Recipe recipe) {
         this.recipe = recipe;
-
         recipeFrame = new JFrame("CookBook");
         recPanel = new JPanel(new MigLayout());
         recipePicture = new ImageIcon(recipe.getImage());
         picLabel = new JLabel(recipePicture);
         currentNumberOfPeople = recipe.getNumberOfPeople();
-        /*button construction and configuration*/
         previousPage = createButtonWithProperties("Back", 98, 50);
         nextPage = createButtonWithProperties("Next", 98, 50);
         home = createButtonWithProperties("Home", 200, 50);
@@ -54,7 +51,6 @@ public class RecipeDisplay extends CookBookDisplay {
         upScale.addActionListener(e -> upScale());
         downScale = createButtonWithProperties("-", 48, 50);
         downScale.addActionListener(e -> downScale());
-
         pairs = new ArrayList<>();
     }
 
@@ -107,8 +103,8 @@ public class RecipeDisplay extends CookBookDisplay {
     }
 
     public void createAndShowGUI () throws IOException {
-        numberOfPeople = (JLabel) createJComponent(JLABEL, PEOPLE + currentNumberOfPeople, 100, 50);
-        recipeTitle = (JLabel) createJComponent(JLABEL, "Recipe:     " + recipe.getTitle(), 300, 50);
+        numberOfPeople = (JLabel) createJComponent("JLabel", PEOPLE + currentNumberOfPeople, 100, 50);
+        recipeTitle = (JLabel) createJComponent("JLabel", "Recipe:     " + recipe.getTitle(), 300, 50);
         recipeDescription = (JTextArea) createJComponent("JTextArea", recipe.getDescription(), 400, 100);
         recipeDescription.setEditable(false);
         DefaultListModel<Object> listModel = new DefaultListModel<>();
