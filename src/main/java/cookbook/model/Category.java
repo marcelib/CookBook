@@ -1,12 +1,16 @@
 package cookbook.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import java.awt.image.BufferedImage;
 import java.util.List;
 
 public class Category {
     private String title;
     private List<Recipe> recipeList;
+    @JsonIgnore
     private BufferedImage categoryImage;
+    @JsonIgnore
     private BufferedImage categoryMiniature;
 
     public Category (String title, List<Recipe> recipeList, BufferedImage categoryImage, BufferedImage categoryMiniature) {

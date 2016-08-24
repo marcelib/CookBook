@@ -1,5 +1,7 @@
 package cookbook.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import java.awt.image.BufferedImage;
 import java.util.List;
 
@@ -7,7 +9,9 @@ public class Recipe {
     private String title;
     private String description;
     private List<Ingredient> ingredientList;
+    @JsonIgnore
     private BufferedImage image;
+    @JsonIgnore
     private BufferedImage miniature;
     private int numberOfPeople;
 

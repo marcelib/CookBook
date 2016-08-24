@@ -10,8 +10,7 @@ import java.io.IOException;
 
 import static cookbook.CookBook.getCategories;
 import static cookbook.CookBook.setCurrCategory;
-import static cookbook.displays.DisplayUtils.setFrameProperties;
-import static cookbook.displays.DisplayUtils.showCatDisplay;
+import static cookbook.displays.DisplayUtils.*;
 
 
 public class MenuDisplay extends CookBookDisplay {
@@ -58,9 +57,11 @@ public class MenuDisplay extends CookBookDisplay {
             });
             recPanel.add(b, "wrap");
         });
-        recPanel.add(new JTextArea("Welcome to the CookBook Application \n" +
+        JTextArea welcome = (JTextArea) createJComponent("JTextArea", "Welcome to the CookBook Application \n" +
                 "Created by:\n" +
-                "Marceli Baczewski\n"), "dock south");
+                "Marceli Baczewski\n", 900, 200);
+        welcome.setEditable(false);
+        recPanel.add(welcome, "dock south");
 
         menuFrame.getContentPane().add(recPanel);
         recPanel.setPreferredSize(new Dimension(1300, 900));
