@@ -70,7 +70,7 @@ public class CategoryDisplay extends CookBookDisplay {
 
     public void createAndShowGUI () throws IOException {
 
-        JLabel picLabel = new JLabel(new ImageIcon(category.getCatImage()));
+        JLabel picLabel = new JLabel(new ImageIcon(category.getCategoryImage()));
         JLabel catTitle = new JLabel("Category:     " + category.getTitle());
         catTitle.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
         catTitle.setFont(new Font(null, Font.PLAIN, 18));

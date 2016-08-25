@@ -32,10 +32,10 @@ public class CategoryTest {
 
     @Test
     public void testGetCategoryImage () {
-        assertEquals(576, testCategory.getCatImage().getHeight());
-        assertEquals(768, testCategory.getCatImage().getWidth());
-        assertEquals(100, testCategory.getCatMiniature().getWidth());
-        assertEquals(100, testCategory.getCatMiniature().getHeight());
+        assertEquals(576, testCategory.getCategoryImage().getHeight());
+        assertEquals(768, testCategory.getCategoryImage().getWidth());
+        assertEquals(100, testCategory.getCategoryMiniature().getWidth());
+        assertEquals(100, testCategory.getCategoryMiniature().getHeight());
     }
 
     @Test

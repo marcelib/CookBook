@@ -34,13 +34,11 @@ public class Category {
         return recipeList;
     }
 
-    @JsonIgnore
-    public BufferedImage getCatImage () {
+    public BufferedImage getCategoryImage () {
         return categoryImage;
     }
 
-    @JsonIgnore
-    BufferedImage getCatMiniature () {
+    BufferedImage getCategoryMiniature () {
         return categoryMiniature;
     }
 }
