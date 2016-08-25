@@ -61,7 +61,7 @@ public class RecipeDisplay extends CookBookDisplay {
 
     @Override
     void nextPage () {
-        if (getCategories().get(getCurrCategory()).getRecList().size() > getCurrRecipeIndex() + 1) {
+        if (getCategories().get(getCurrCategory()).getRecipeList().size() > getCurrRecipeIndex() + 1) {
             setCurrRecipe(getCurrRecipeIndex() + 1);
             updateAllComponents();
         } else if (getCategories().size() > getCurrCategory() + 1) {
@@ -89,7 +89,7 @@ public class RecipeDisplay extends CookBookDisplay {
 
     void updateAllComponents () {
         this.recipe = getCategories().get(getCurrCategory())
-                .getRecList().get(getCurrRecipeIndex());
+                .getRecipeList().get(getCurrRecipeIndex());
         currentNumberOfPeople = recipe.getNumberOfPeople();
         numberOfPeople.setText(PEOPLE + currentNumberOfPeople);
         recipe.getIngredientList().forEach(i -> i.reScale(currentNumberOfPeople));

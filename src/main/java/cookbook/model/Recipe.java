@@ -1,18 +1,26 @@
 package cookbook.model;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonRootName;
 
 import java.awt.image.BufferedImage;
 import java.util.List;
 
+@JsonRootName(value = "recipe")
 public class Recipe {
+
+    @JsonProperty("title")
     private String title;
+    @JsonProperty("description")
     private String description;
+    @JsonProperty("ingredients")
     private List<Ingredient> ingredientList;
     @JsonIgnore
     private BufferedImage image;
     @JsonIgnore
     private BufferedImage miniature;
+    @JsonProperty("numberOfPeople")
     private int numberOfPeople;
 
     public Recipe (String title, String description, List<Ingredient> ingredientList, BufferedImage image, BufferedImage miniature, int numberOfPeople) {
@@ -36,10 +44,12 @@ public class Recipe {
         return ingredientList;
     }
 
+    @JsonIgnore
     public BufferedImage getImage () {
         return image;
     }
 
+    @JsonIgnore
     BufferedImage getMiniature () {
         return miniature;
     }

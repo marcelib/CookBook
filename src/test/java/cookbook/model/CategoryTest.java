@@ -40,9 +40,9 @@ public class CategoryTest {
 
     @Test
     public void testListImage () {
-        assertEquals(576, testCategory.getRecList().get(0).getImage().getHeight());
-        assertEquals(768, testCategory.getRecList().get(0).getImage().getWidth());
-        assertEquals(100, testCategory.getRecList().get(1).getMiniature().getHeight());
-        assertEquals(100, testCategory.getRecList().get(1).getMiniature().getWidth());
+        assertEquals(576, testCategory.getRecipeList().get(0).getImage().getHeight());
+        assertEquals(768, testCategory.getRecipeList().get(0).getImage().getWidth());
+        assertEquals(100, testCategory.getRecipeList().get(1).getMiniature().getHeight());
+        assertEquals(100, testCategory.getRecipeList().get(1).getMiniature().getWidth());
     }
 }

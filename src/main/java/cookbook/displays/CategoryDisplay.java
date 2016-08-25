@@ -46,7 +46,7 @@ public class CategoryDisplay extends CookBookDisplay {
         } else {
             setCurrCategory(getCurrCategory() - 1);
             setCurrRecipe(getCategories()
-                    .get(getCurrCategory()).getRecList().size() - 1);
+                    .get(getCurrCategory()).getRecipeList().size() - 1);
             showRecDisplay();
             hideCurrentDisplay();
         }
@@ -81,11 +81,11 @@ public class CategoryDisplay extends CookBookDisplay {
         recPanel.add(createButtonWithProperties("Back", 98, 50), "split");
         recPanel.add(createButtonWithProperties("Next", 98, 50), "wrap");
 
-        category.getRecList().forEach(e -> {
+        category.getRecipeList().forEach(e -> {
             JButton button = new JButton(e.getTitle());
             button.setPreferredSize(new Dimension(200, 50));
             button.addActionListener(a -> {
-                setCurrRecipe(category.getRecList().indexOf(e));
+                setCurrRecipe(category.getRecipeList().indexOf(e));
                 showRecDisplay();
                 hideCurrentDisplay();
             });
