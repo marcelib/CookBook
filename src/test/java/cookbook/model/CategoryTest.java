@@ -1,16 +1,21 @@
 package cookbook.model;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
 public class CategoryTest {
+
+    private String categoryJson;
     private Category testCategory;
 
     @Before
@@ -27,11 +32,12 @@ public class CategoryTest {
         Recipe testRecipe2 = new Recipe("French fries", "A classic dinner!",
                 Arrays.asList(testIngredient1, testIngredient2), testImage, testMiniature, 5);
 
+        categoryJson = new String(Files.readAllBytes(Paths.get("./src/test/resources/json/testCategory.json")));
         testCategory = new Category("Dinner", Arrays.asList(testRecipe1, testRecipe2), testImage, testMiniature);
     }
 
     @Test
-    public void testGetCategoryImage () {
+    public void categoryImageTest () {
         assertEquals(576, testCategory.getCategoryImage().getHeight());
         assertEquals(768, testCategory.getCategoryImage().getWidth());
         assertEquals(100, testCategory.getCategoryMiniature().getWidth());
@@ -39,10 +45,17 @@ public class CategoryTest {
     }
 
     @Test
-    public void testListImage () {
+    public void imageListTest () {
         assertEquals(576, testCategory.getRecipeList().get(0).getImage().getHeight());
         assertEquals(768, testCategory.getRecipeList().get(0).getImage().getWidth());
         assertEquals(100, testCategory.getRecipeList().get(1).getMiniature().getHeight());
         assertEquals(100, testCategory.getRecipeList().get(1).getMiniature().getWidth());
+    }
+
+    @Test
+    public void toJsonTest () throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        String testIngredientJson = mapper.writeValueAsString(testCategory);
+        assertEquals(categoryJson, testIngredientJson);
     }
 }

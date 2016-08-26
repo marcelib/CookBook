@@ -6,7 +6,7 @@ import org.codehaus.jackson.map.annotate.JsonRootName;
 @JsonRootName(value = "ingredient")
 public class Ingredient {
 
-    @JsonProperty("defaultAmount")
+    @JsonProperty("people")
     private int numberOfPeople;
     @JsonProperty("name")
     private String name;
