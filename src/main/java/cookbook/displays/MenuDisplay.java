@@ -12,7 +12,6 @@ import static cookbook.CookBook.getCategories;
 import static cookbook.CookBook.setCurrCategory;
 import static cookbook.displays.DisplayUtils.*;
 
-
 public class MenuDisplay extends CookBookDisplay {
 
     private JFrame menuFrame;

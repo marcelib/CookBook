@@ -138,8 +138,7 @@ public class RecipeDisplay extends CookBookDisplay {
 
     private void updateList () {
         numberOfPeople.setText(PEOPLE + currentNumberOfPeople);
-        recipe.getIngredientList().forEach(i -> i.reScale(currentNumberOfPeople));
         ingredientStringsJList.setListData(recipe.getIngredientList()
-                .stream().map(Ingredient::toString).collect(Collectors.toList()).toArray());
+                .stream().map(i -> i.reScale(currentNumberOfPeople)).collect(Collectors.toList()).toArray());
     }
 }

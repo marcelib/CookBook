@@ -7,7 +7,7 @@ import org.codehaus.jackson.map.annotate.JsonRootName;
 public class Ingredient {
 
     @JsonProperty("defaultAmount")
-    private final int defaultAmount;
+    private int numberOfPeople;
     @JsonProperty("name")
     private String name;
     @JsonProperty("unit")
@@ -18,8 +18,8 @@ public class Ingredient {
     public Ingredient (String name, String unit, int amount, int numberOfPeople) {
         this.name = name;
         this.unit = unit;
-        defaultAmount = (amount + numberOfPeople - 1) / numberOfPeople;
-        this.amount = defaultAmount;
+        this.amount = amount;
+        this.numberOfPeople = numberOfPeople;
     }
 
     String getName () {
@@ -34,8 +34,9 @@ public class Ingredient {
         return amount;
     }
 
-    public void reScale (int numberOfPeople) {
-        amount = numberOfPeople * defaultAmount;
+    public Ingredient reScale (int newNumberOfPeople) {
+        int rescaledAmount = amount * newNumberOfPeople / numberOfPeople;
+        return new Ingredient(name, unit, rescaledAmount, newNumberOfPeople);
     }
 
     @Override

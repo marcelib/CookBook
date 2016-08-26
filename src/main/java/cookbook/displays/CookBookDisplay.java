@@ -28,8 +28,7 @@ abstract class CookBookDisplay extends JFrame {
     abstract void nextPage();
 
     /* not necessarily in child classes */
-    void previousPage() {
-    }
+    void previousPage() {}
 
     /* used in button generation */
     JButton createButtonWithProperties(String title, int width, int height) {

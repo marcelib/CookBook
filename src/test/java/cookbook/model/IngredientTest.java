@@ -20,11 +20,13 @@ public class IngredientTest {
 
     @Test
     public void testReScale () {
-        testIngredient.reScale(5);
-        assertEquals("Pepper   100  grams", testIngredient.toString());
-        testIngredient.reScale(2);
-        assertEquals("Pepper   40  grams", testIngredient.toString());
-        testIngredient.reScale(3);
-        assertEquals("Pepper   60  grams", testIngredient.toString());
+        Ingredient rescaledIngredient = testIngredient.reScale(5);
+        assertEquals(rescaledIngredient.getAmount(), 100);
+    }
+
+    @Test
+    public void testRescaleAndToString () {
+        Ingredient rescaledIngredient = testIngredient.reScale(10);
+        assertEquals("Pepper   200  grams", rescaledIngredient.toString());
     }
 }

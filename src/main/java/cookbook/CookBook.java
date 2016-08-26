@@ -21,13 +21,12 @@ public class CookBook {
     private static Integer currentCategory;
     private static Integer currentRecipe;
     private static List<Category> categories = new ArrayList<>();
-    //Observer pattern- state is defined by these three objects
+    //Observer pattern- state is represented by these three objects
     private static RecipeDisplay recDisplay;
     private static CategoryDisplay catDisplay;
     private static MenuDisplay menuDisplay;
 
-    private CookBook() {
-    }
+    private CookBook() {}
 
     public static void main(String[] args) throws IOException {
 

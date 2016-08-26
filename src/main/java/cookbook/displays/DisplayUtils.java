@@ -41,7 +41,7 @@ class DisplayUtils {
     }
 
     static void setComponentProperties (JComponent component, int width, int height) {
-        component.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
+        component.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
         component.setPreferredSize(new Dimension(width, height));
         component.setFont(new Font(null, Font.PLAIN, 18));
     }
