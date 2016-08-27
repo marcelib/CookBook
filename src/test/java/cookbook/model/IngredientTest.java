@@ -1,12 +1,11 @@
 package cookbook.model;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.simple.parser.JSONParser;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.FileReader;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,8 +15,8 @@ public class IngredientTest {
     private Ingredient testIngredient;
 
     @Before
-    public void setUp () throws IOException {
-        ingredientJson = new String(Files.readAllBytes(Paths.get("./src/test/resources/json/testIngredient.json")));
+    public void setUp () throws Exception {
+        ingredientJson = new JSONParser().parse(new FileReader("./src/test/resources/json/testIngredient.json")).toString();
         testIngredient = new Ingredient("Pepper", "grams", 20, 1);
     }
 
@@ -39,9 +38,9 @@ public class IngredientTest {
     }
 
     @Test
-    public void toJsonTest () throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String testIngredientJson = mapper.writeValueAsString(testIngredient);
-        assertEquals(ingredientJson, testIngredientJson);
+    public void toJsonTest () throws Exception {
+        String testIngredientJson = (new JSONParser()
+                .parse(new ObjectMapper().writeValueAsString(testIngredient))).toString();
+        assertEquals(testIngredientJson, ingredientJson);
     }
 }

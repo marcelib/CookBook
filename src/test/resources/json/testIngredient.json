@@ -1,1 +1,6 @@
-{"name":"Pepper","unit":"grams","amount":20,"people":1}
+{
+  "name": "Pepper",
+  "unit": "grams",
+  "amount": 20,
+  "people": 1
+}

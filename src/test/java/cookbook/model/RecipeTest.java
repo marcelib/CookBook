@@ -1,13 +1,13 @@
 package cookbook.model;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.simple.parser.JSONParser;
 import org.junit.Before;
 import org.junit.Test;
 
 import javax.imageio.ImageIO;
+import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
@@ -18,8 +18,8 @@ public class RecipeTest {
     private Recipe testRecipe;
 
     @Before
-    public void setUp () throws IOException {
-        recipeJson = new String(Files.readAllBytes(Paths.get("./src/test/resources/json/testRecipe.json")));
+    public void setUp () throws Exception {
+        recipeJson = new JSONParser().parse(new FileReader("./src/test/resources/json/testRecipe.json")).toString();
         testRecipe = new Recipe("Noodles", "Great noodles for everyone",
                 Arrays.asList(new Ingredient("Potato", "Grams", 20, 1),
                         new Ingredient("Herbs", "Grams", 2, 1),
@@ -55,9 +55,9 @@ public class RecipeTest {
     }
 
     @Test
-    public void toJsonTest () throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String testIngredientJson = mapper.writeValueAsString(testRecipe);
-        assertEquals(recipeJson, testIngredientJson);
+    public void toJsonTest () throws Exception {
+        String testRecipeJSON = (new JSONParser()
+                .parse(new ObjectMapper().writeValueAsString(testRecipe))).toString();
+        assertEquals(recipeJson, testRecipeJSON);
     }
 }

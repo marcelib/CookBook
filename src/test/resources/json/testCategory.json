@@ -1,1 +1,43 @@
-{"title":"Dinner","recipes":[{"title":"Noodles","description":"Great noodles for everyone","numberOfPeople":5,"ingredients":[{"name":"Potato","unit":"Grams","amount":20,"people":1},{"name":"Fries","unit":"Grams","amount":200,"people":1}]},{"title":"French fries","description":"A classic dinner!","numberOfPeople":5,"ingredients":[{"name":"Potato","unit":"Grams","amount":20,"people":1},{"name":"Fries","unit":"Grams","amount":200,"people":1}]}]}
+{
+  "title": "Dinner",
+  "recipes": [
+    {
+      "title": "Noodles",
+      "description": "Great noodles for everyone",
+      "numberOfPeople": 5,
+      "ingredients": [
+        {
+          "name": "Potato",
+          "unit": "Grams",
+          "amount": 20,
+          "people": 1
+        },
+        {
+          "name": "Fries",
+          "unit": "Grams",
+          "amount": 200,
+          "people": 1
+        }
+      ]
+    },
+    {
+      "title": "French fries",
+      "description": "A classic dinner!",
+      "numberOfPeople": 5,
+      "ingredients": [
+        {
+          "name": "Potato",
+          "unit": "Grams",
+          "amount": 20,
+          "people": 1
+        },
+        {
+          "name": "Fries",
+          "unit": "Grams",
+          "amount": 200,
+          "people": 1
+        }
+      ]
+    }
+  ]
+}

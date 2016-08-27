@@ -1,14 +1,13 @@
 package cookbook.model;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.simple.parser.JSONParser;
 import org.junit.Before;
 import org.junit.Test;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.FileReader;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
@@ -19,7 +18,7 @@ public class CategoryTest {
     private Category testCategory;
 
     @Before
-    public void setUp () throws IOException {
+    public void setUp () throws Exception {
 
         BufferedImage testImage = ImageIO.read(this.getClass().getResource("/testImage.png"));
         BufferedImage testMiniature = ImageIO.read(this.getClass().getResource("/testMiniature.png"));
@@ -32,7 +31,7 @@ public class CategoryTest {
         Recipe testRecipe2 = new Recipe("French fries", "A classic dinner!",
                 Arrays.asList(testIngredient1, testIngredient2), testImage, testMiniature, 5);
 
-        categoryJson = new String(Files.readAllBytes(Paths.get("./src/test/resources/json/testCategory.json")));
+        categoryJson = new JSONParser().parse(new FileReader("./src/test/resources/json/testCategory.json")).toString();
         testCategory = new Category("Dinner", Arrays.asList(testRecipe1, testRecipe2), testImage, testMiniature);
     }
 
@@ -53,9 +52,9 @@ public class CategoryTest {
     }
 
     @Test
-    public void toJsonTest () throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String testIngredientJson = mapper.writeValueAsString(testCategory);
-        assertEquals(categoryJson, testIngredientJson);
+    public void toJsonTest () throws Exception {
+        String testCategoryJson = (new JSONParser()
+                .parse(new ObjectMapper().writeValueAsString(testCategory))).toString();
+        assertEquals(categoryJson, testCategoryJson);
     }
 }
