@@ -1,6 +1,6 @@
 {
-  "name": "Pepper",
-  "unit": "grams",
   "amount": 20,
+  "unit": "grams",
+  "name": "Pepper",
   "people": 1
 }

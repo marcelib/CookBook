@@ -1,29 +1,38 @@
 package cookbook.model;
 
+import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @JsonRootName(value = "category")
 public class Category {
 
-    @JsonProperty("title")
-    private String title;
-    @JsonProperty("recipes")
-    private List<Recipe> recipeList;
+    @JsonIgnore
+    private static final Logger LOGGER = Logger.getLogger(Category.class.getName());
     @JsonIgnore
     private BufferedImage categoryImage;
-    @JsonIgnore
-    private BufferedImage categoryMiniature;
+    @JsonProperty("recipes")
+    private List<Recipe> recipeList;
+    @JsonProperty("imagePath")
+    private String imagePath;
+    private String title;
 
-    public Category (String title, List<Recipe> recipeList, BufferedImage categoryImage, BufferedImage categoryMiniature) {
+    @JsonCreator
+    Category (@JsonProperty("title") String title,
+              @JsonProperty("recipes") List<Recipe> recipeList,
+              @JsonProperty("imagePath") String imagePath) throws IOException {
         this.title = title;
         this.recipeList = recipeList;
-        this.categoryImage = categoryImage;
-        this.categoryMiniature = categoryMiniature;
+        this.imagePath = imagePath;
     }
 
     public String getTitle () {
@@ -38,7 +47,12 @@ public class Category {
         return categoryImage;
     }
 
-    BufferedImage getCategoryMiniature () {
-        return categoryMiniature;
+    public void loadImages () {
+        try {
+            this.categoryImage = imagePath != null ? ImageIO.read(new File(imagePath)) : null;
+            recipeList.forEach(Recipe::loadImage);
+        } catch(IOException e1) {
+            LOGGER.log(Level.SEVERE, "An IOException has occured in Category class", e1);
+        }
     }
 }

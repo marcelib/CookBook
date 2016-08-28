@@ -5,7 +5,6 @@ import org.json.simple.parser.JSONParser;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.imageio.ImageIO;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
@@ -14,18 +13,20 @@ import static org.junit.Assert.assertEquals;
 
 public class RecipeTest {
 
+    private final static String IMAGE_PATH = "src/test/resources/testImage.png";
     private String recipeJson;
     private Recipe testRecipe;
 
     @Before
     public void setUp () throws Exception {
-        recipeJson = new JSONParser().parse(new FileReader("./src/test/resources/json/testRecipe.json")).toString();
+        recipeJson = new JSONParser()
+                .parse(new FileReader("./src/test/resources/json/testRecipe.json")).toString();
         testRecipe = new Recipe("Noodles", "Great noodles for everyone",
-                Arrays.asList(new Ingredient("Potato", "Grams", 20, 1),
-                        new Ingredient("Herbs", "Grams", 2, 1),
-                        new Ingredient("Water", "Liters", 20, 1)),
-                ImageIO.read(this.getClass().getResource("/testImage.png")),
-                ImageIO.read(this.getClass().getResource("/testMiniature.png")), 5);
+                Arrays.asList(new Ingredient("Potato", 20, "Grams", 1),
+                        new Ingredient("Herbs", 2, "Grams", 1),
+                        new Ingredient("Water", 20, "Liters", 1)),
+                IMAGE_PATH, 5);
+        testRecipe.loadImage();
     }
 
     @Test
@@ -50,8 +51,6 @@ public class RecipeTest {
     public void imagesTest () throws IOException {
         assertEquals(576, testRecipe.getImage().getHeight());
         assertEquals(768, testRecipe.getImage().getWidth());
-        assertEquals(100, testRecipe.getMiniature().getWidth());
-        assertEquals(100, testRecipe.getMiniature().getHeight());
     }
 
     @Test

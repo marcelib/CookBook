@@ -43,7 +43,7 @@ public class RecipeDisplay extends CookBookDisplay {
         recPanel = new JPanel(new MigLayout());
         recipePicture = new ImageIcon(recipe.getImage());
         picLabel = new JLabel(recipePicture);
-        currentNumberOfPeople = recipe.getNumberOfPeople();
+        currentNumberOfPeople = recipe.getPeople();
         previousPage = createButtonWithProperties("Back", 98, 50);
         nextPage = createButtonWithProperties("Next", 98, 50);
         home = createButtonWithProperties("Home", 200, 50);
@@ -90,7 +90,7 @@ public class RecipeDisplay extends CookBookDisplay {
     void updateAllComponents () {
         this.recipe = getCategories().get(getCurrCategory())
                 .getRecipeList().get(getCurrRecipeIndex());
-        currentNumberOfPeople = recipe.getNumberOfPeople();
+        currentNumberOfPeople = recipe.getPeople();
         numberOfPeople.setText(PEOPLE + currentNumberOfPeople);
         recipe.getIngredientList().forEach(i -> i.reScale(currentNumberOfPeople));
         ingredientStringsJList.setListData(recipe.getIngredientList()

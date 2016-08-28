@@ -1,25 +1,31 @@
 package cookbook.model;
 
+import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
 
 @JsonRootName(value = "ingredient")
 public class Ingredient {
 
-    @JsonProperty("people")
-    private int numberOfPeople;
     @JsonProperty("name")
     private String name;
-    @JsonProperty("unit")
-    private String unit;
     @JsonProperty("amount")
     private int amount;
+    @JsonProperty("unit")
+    private String unit;
+    @JsonProperty("people")
+    private int people;
 
-    public Ingredient (String name, String unit, int amount, int numberOfPeople) {
+    @JsonCreator
+    Ingredient (
+            @JsonProperty("name") String name,
+            @JsonProperty("amount") int amount,
+            @JsonProperty("unit") String unit,
+            @JsonProperty("people") int people) {
         this.name = name;
-        this.unit = unit;
         this.amount = amount;
-        this.numberOfPeople = numberOfPeople;
+        this.unit = unit;
+        this.people = people;
     }
 
     String getName () {
@@ -35,8 +41,8 @@ public class Ingredient {
     }
 
     public Ingredient reScale (int newNumberOfPeople) {
-        int rescaledAmount = amount * newNumberOfPeople / numberOfPeople;
-        return new Ingredient(name, unit, rescaledAmount, newNumberOfPeople);
+        int rescaledAmount = amount * newNumberOfPeople / people;
+        return new Ingredient(name, rescaledAmount, unit, newNumberOfPeople);
     }
 
     @Override

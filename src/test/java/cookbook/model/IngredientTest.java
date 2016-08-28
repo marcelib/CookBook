@@ -16,8 +16,9 @@ public class IngredientTest {
 
     @Before
     public void setUp () throws Exception {
-        ingredientJson = new JSONParser().parse(new FileReader("./src/test/resources/json/testIngredient.json")).toString();
-        testIngredient = new Ingredient("Pepper", "grams", 20, 1);
+        ingredientJson = new JSONParser()
+                .parse(new FileReader("./src/test/resources/json/testIngredient.json")).toString();
+        testIngredient = new Ingredient("Pepper", 20, "grams", 1);
     }
 
     @Test

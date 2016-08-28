@@ -1,18 +1,19 @@
 package cookbook.readers;
 
-import org.junit.Before;
+import cookbook.model.Category;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class JsonReaderTest {
 
-    @Before
-    public void setUp() throws Exception {
-    }
-
     @Test
-    public void readCategories() throws Exception {
+    public void readCategories () throws Exception {
+        List<Category> categoryList = new JsonReader().readCategories("src/test/resources/json/testCategories.json");
+        assertEquals(categoryList.get(0).getTitle(), "Dinner");
+        assertEquals(categoryList.get(0).getRecipeList().get(0).getTitle(), "Noodles");
+        assertEquals(categoryList.get(0).getRecipeList().get(0).getDescription(), "Great noodles for everyone");
     }
-
 }

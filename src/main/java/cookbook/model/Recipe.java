@@ -1,35 +1,45 @@
 package cookbook.model;
 
+import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @JsonRootName(value = "recipe")
 public class Recipe {
 
-    @JsonProperty("title")
-    private String title;
-    @JsonProperty("description")
-    private String description;
-    @JsonProperty("ingredients")
-    private List<Ingredient> ingredientList;
+    @JsonIgnore
+    private static final Logger LOGGER = Logger.getLogger(Recipe.class.getName());
     @JsonIgnore
     private BufferedImage image;
-    @JsonIgnore
-    private BufferedImage miniature;
-    @JsonProperty("numberOfPeople")
-    private int numberOfPeople;
+    @JsonProperty("ingredients")
+    private List<Ingredient> ingredientList;
+    @JsonProperty("imagePath")
+    private String imagePath;
+    private String title;
+    private String description;
+    private int people;
 
-    public Recipe (String title, String description, List<Ingredient> ingredientList, BufferedImage image, BufferedImage miniature, int numberOfPeople) {
+    @JsonCreator
+    Recipe (
+            @JsonProperty("title") String title,
+            @JsonProperty("description") String description,
+            @JsonProperty("ingredients") List<Ingredient> ingredientList,
+            @JsonProperty("imagePath") String imagePath,
+            @JsonProperty("people") int people) {
         this.title = title;
         this.description = description;
         this.ingredientList = ingredientList;
-        this.image = image;
-        this.miniature = miniature;
-        this.numberOfPeople = numberOfPeople;
+        this.imagePath = imagePath;
+        this.people = people;
     }
 
     public String getTitle () {
@@ -49,12 +59,15 @@ public class Recipe {
         return image;
     }
 
-    @JsonIgnore
-    BufferedImage getMiniature () {
-        return miniature;
+    public int getPeople () {
+        return people;
     }
 
-    public int getNumberOfPeople () {
-        return numberOfPeople;
+    void loadImage () {
+        try {
+            this.image = ImageIO.read(new File(imagePath));
+        } catch(IOException e) {
+            LOGGER.log(Level.SEVERE, "An IOException in Recipe class has occured", e);
+        }
     }
 }

@@ -1,25 +1,26 @@
 {
-  "title": "Noodles",
+  "imagePath": "src/test/resources/testImage.png",
   "description": "Great noodles for everyone",
-  "numberOfPeople": 5,
   "ingredients": [
     {
+      "amount": 20,
+      "unit": "Grams",
       "name": "Potato",
-      "unit": "Grams",
-      "amount": 20,
       "people": 1
     },
     {
-      "name": "Herbs",
-      "unit": "Grams",
       "amount": 2,
+      "unit": "Grams",
+      "name": "Herbs",
       "people": 1
     },
     {
-      "name": "Water",
-      "unit": "Liters",
       "amount": 20,
+      "unit": "Liters",
+      "name": "Water",
       "people": 1
     }
-  ]
+  ],
+  "title": "Noodles",
+  "people": 5
 }
