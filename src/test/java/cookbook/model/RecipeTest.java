@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 
 public class RecipeTest {
 
-    private final static String IMAGE_PATH = "src/test/resources/testImage.png";
+    private final static String IMAGE_PATH = "./src/test/resources/testImage.png";
     private String recipeJson;
     private Recipe testRecipe;
 

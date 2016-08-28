@@ -31,7 +31,7 @@ public class CookBook {
     public static void main (String[] args) throws IOException {
 
         try {
-            categories = new JsonReader().readCategories("src/main/resources/json/categories.json");
+            categories = new JsonReader().readCategories("./src/main/resources/json/categories.json");
             categories.forEach(Category::loadImages);
         } catch(Exception e) {
             LOGGER.log(Level.SEVERE, "An exception has occured while loading categories", e);

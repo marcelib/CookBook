@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 
 public class CategoryTest {
 
-    private final static String IMAGE_PATH = "src/test/resources/testImage.png";
+    private final static String IMAGE_PATH = "./src/test/resources/testImage.png";
     private String categoryJson;
     private Category testCategory;
 
