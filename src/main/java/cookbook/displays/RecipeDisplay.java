@@ -67,6 +67,7 @@ public class RecipeDisplay extends CookBookDisplay {
         } else if (getCategories().size() > getCurrCategory() + 1) {
             setCurrCategory(getCurrCategory() + 1);
             setCurrRecipe(0);
+            hideCurrentDisplay();
             showCatDisplay();
         }
     }
