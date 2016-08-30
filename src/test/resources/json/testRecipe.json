@@ -1,5 +1,5 @@
 {
-  "imagePath": "./src/test/resources/testImage.png",
+  "imagePath": "/testImage.png",
   "description": "Great noodles for everyone",
   "ingredients": [
     {

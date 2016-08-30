@@ -10,8 +10,8 @@ import static org.junit.Assert.assertEquals;
 public class JsonReaderTest {
 
     @Test
-    public void readCategories () throws Exception {
-        List<Category> categoryList = new JsonReader().readCategories("./src/test/resources/json/testCategories.json");
+    public void readCategories() throws Exception {
+        List<Category> categoryList = new JsonReader().readCategories("/json/testCategories.json");
         assertEquals(categoryList.get(0).getTitle(), "Dinner");
         assertEquals(categoryList.get(0).getRecipeList().get(0).getTitle(), "Noodles");
         assertEquals(categoryList.get(0).getRecipeList().get(0).getDescription(), "Great noodles for everyone");

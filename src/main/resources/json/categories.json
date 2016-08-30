@@ -1,13 +1,13 @@
 [
   {
     "title": "Dinners",
-    "imagePath": "images/DinnerCategory.jpg",
+    "imagePath": "/images/DinnerCategory.jpg",
     "recipes": [
       {
         "title": "Hamburger 1",
         "description": "A hamburger 1 (or cheeseburger when served with a slice of cheese) is a sandwich consisting of one or more\n cooked patties of ground meat, usually beef, placed inside a sliced bread roll or bun.\n Hamburgers may be cooked in a variety of ways, including pan-frying, barbecuing, and flame-broiling.\nHamburgers are often served with cheese, lettuce, tomato, bacon, onion, pickles, and condiments\n such as mustard, mayonnaise, ketchup, relish, and chiles.",
         "people": 2,
-        "imagePath": "images/hamburger.jpg",
+        "imagePath": "/images/hamburger.jpg",
         "ingredients": [
           {
             "name": "Rolls",
@@ -39,7 +39,7 @@
         "title": "Salad 2",
         "description": "A salad is a dish consisting of small pieces of food, which may be mixed with a sauce or salad dressing. They are typically served cold. \nSalads can incorporate a variety of foods including vegetables, fruits, cheese, cooked meat, eggs, grains and nuts.\nGarden salads use a base of leafy greens like lettuce, arugula, kale or spinach;\n they are common enough that the word salad alone often refers specifically to garden salads.\n",
         "people": 1,
-        "imagePath": "images/salad.jpg",
+        "imagePath": "/images/salad.jpg",
         "ingredients": [
           {
             "name": "Salad",
@@ -71,7 +71,7 @@
         "title": "Pizza 3",
         "description": "“This classic American recipe with a killer crusty base and beautiful meaty toppings makes the perfect pizza. ”",
         "people": 4,
-        "imagePath": "images/pizza.jpg",
+        "imagePath": "/images/pizza.jpg",
         "ingredients": [
           {
             "name": "Water",
@@ -115,7 +115,7 @@
         "title": "Spaghetti 4",
         "description": "A great introduction to pasta for kids – loads of fun to eat, and a brilliant base for adding all kinds of other fresh ingredients. ",
         "people": 5,
-        "imagePath": "images/spaghetti.jpeg",
+        "imagePath": "/images/spaghetti.jpeg",
         "ingredients": [
           {
             "name": "Tomatoes",
@@ -159,13 +159,13 @@
   },
   {
     "title": "Desserts",
-    "imagePath": "images/DessertsCategory.jpg",
+    "imagePath": "/images/DessertsCategory.jpg",
     "recipes": [
       {
         "title": "Chocolate Cake 5",
         "description": "The absolute best, richest, and easiest one-bowl chocolate cake recipe ever! It's great topped with chocolate cream cheese frosting!",
         "people": 2,
-        "imagePath": "images/chocolate-cake.jpg",
+        "imagePath": "/images/chocolate-cake.jpg",
         "ingredients": [
           {
             "name": "Flour",
@@ -209,7 +209,7 @@
         "title": "Lemon Cocoa Cake 6",
         "description": "This simple recipe can be served as is in a graham crustn\n or you can dress it up with a strawberry or peach glaze. \nEither way, a little Cool Whip or whipped cream on top is good.",
         "people": 1,
-        "imagePath": "images/delicious-pie.jpeg",
+        "imagePath": "/images/delicious-pie.jpeg",
         "ingredients": [
           {
             "name": "Lemon",
@@ -253,7 +253,7 @@
         "title": "Sweet Cherry Pie 7",
         "description": "You've never had a cherry pie this good—an incredible sour cherry filling,\n a light and flaky crust, and vanilla ice cream to top it all off.\n If you can't find sour cherries, use sweet cherries and a little extra lemon juice instead.\n",
         "people": 1,
-        "imagePath": "images/cherry-pie-with-cream.jpeg",
+        "imagePath": "/images/cherry-pie-with-cream.jpeg",
         "ingredients": [
           {
             "name": "Cherries",
@@ -297,7 +297,7 @@
         "title": "Bananas with Chocolate 8",
         "description": "This delicous recipe is very easy to make as well as very tasty!\nPeel and slice the banana. Scoop the ice cream into a bowl.\n Top with the banana, chocolate sauce, and coconut.\n",
         "people": 1,
-        "imagePath": "images/bananaschocolate.jpg",
+        "imagePath": "/images/bananaschocolate.jpg",
         "ingredients": [
           {
             "name": "Bananas",
@@ -335,13 +335,13 @@
   },
   {
     "title": "Drinks",
-    "imagePath": "images/DrinksCategory.jpg",
+    "imagePath": "/images/DrinksCategory.jpg",
     "recipes": [
       {
         "title": "Mojito 9",
         "description": "This is an authentic recipe for mojito.\nI sized the recipe for one serving, but you can adjust it accordingly and make a pitcher full.\nIt's a very refreshing drink for hot summer days.\n",
         "people": 1,
-        "imagePath": "images/drink1.jpg",
+        "imagePath": "/images/drink1.jpg",
         "ingredients": [
           {
             "name": "Vodka",
@@ -373,7 +373,7 @@
         "title": "Orange Cocktail 10",
         "description": "A nice summer cocktail with a good mix of fruity flavors. ",
         "people": 1,
-        "imagePath": "images/drink2.jpg",
+        "imagePath": "/images/drink2.jpg",
         "ingredients": [
           {
             "name": "Vodka",
@@ -405,7 +405,7 @@
         "title": "Summer Cocktail 11",
         "description": "Recipe courtesy Nico Szymanski, head mixologist, Gerber Group, New York City\nThis cocktail was created for Irvington, Gerber Group’s new restaurant across from NYC’s Union Square.\nWhile Szymanski sources his produce from local farmers at the famed Union Square Greenmarket,\nbonus points to you if you can pluck fresh mint and blackberries from your garden to make this tall, bubbly drink.\n",
         "people": 2,
-        "imagePath": "images/drink3.jpg",
+        "imagePath": "/images/drink3.jpg",
         "ingredients": [
           {
             "name": "Vodka",

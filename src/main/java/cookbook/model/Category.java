@@ -6,6 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,9 +18,7 @@ import java.util.logging.Logger;
 public class Category {
 
     @JsonIgnore
-    private static final Logger LOGGER = Logger.getLogger(Category.class.getName());
-    @JsonIgnore
-    private BufferedImage categoryImage;
+    private ImageIcon categoryImage;
     @JsonProperty("recipes")
     private List<Recipe> recipeList;
     @JsonProperty("imagePath")
@@ -27,32 +26,28 @@ public class Category {
     private String title;
 
     @JsonCreator
-    Category (@JsonProperty("title") String title,
-              @JsonProperty("recipes") List<Recipe> recipeList,
-              @JsonProperty("imagePath") String imagePath) throws IOException {
+    Category(@JsonProperty("title") String title,
+             @JsonProperty("recipes") List<Recipe> recipeList,
+             @JsonProperty("imagePath") String imagePath) throws IOException {
         this.title = title;
         this.recipeList = recipeList;
         this.imagePath = imagePath;
     }
 
-    public String getTitle () {
+    public String getTitle() {
         return title;
     }
 
-    public List<Recipe> getRecipeList () {
+    public List<Recipe> getRecipeList() {
         return recipeList;
     }
 
-    public BufferedImage getCategoryImage () {
+    public ImageIcon getCategoryImage() {
         return categoryImage;
     }
 
-    public void loadImages () {
-        try {
-            this.categoryImage = imagePath != null ? ImageIO.read(new File(imagePath)) : null;
-            recipeList.forEach(Recipe::loadImage);
-        } catch(IOException e1) {
-            LOGGER.log(Level.SEVERE, "An IOException has occured in Category class", e1);
-        }
+    public void loadImages() {
+        this.categoryImage = new ImageIcon(getClass().getResource(imagePath));
+        recipeList.forEach(Recipe::loadImage);
     }
 }

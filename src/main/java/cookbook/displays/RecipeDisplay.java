@@ -7,6 +7,7 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,11 +38,11 @@ public class RecipeDisplay extends CookBookDisplay {
     private JButton upScale;
     private JButton downScale;
 
-    public RecipeDisplay (Recipe recipe) {
+    public RecipeDisplay(Recipe recipe) {
         this.recipe = recipe;
         recipeFrame = new JFrame("CookBook");
         recPanel = new JPanel(new MigLayout());
-        recipePicture = new ImageIcon(recipe.getImage());
+        recipePicture = recipe.getImage();
         picLabel = new JLabel(recipePicture);
         currentNumberOfPeople = recipe.getPeople();
         previousPage = createButtonWithProperties("Back", 98, 50);
@@ -55,12 +56,12 @@ public class RecipeDisplay extends CookBookDisplay {
     }
 
     @Override
-    public void setVisible (boolean b) {
+    public void setVisible(boolean b) {
         recipeFrame.setVisible(b);
     }
 
     @Override
-    void nextPage () {
+    void nextPage() {
         if (getCategories().get(getCurrCategory()).getRecipeList().size() > getCurrRecipeIndex() + 1) {
             setCurrRecipe(getCurrRecipeIndex() + 1);
             updateAllComponents();
@@ -73,7 +74,7 @@ public class RecipeDisplay extends CookBookDisplay {
     }
 
     @Override
-    void previousPage () {
+    void previousPage() {
         if (getCurrRecipeIndex() > 0) {
             setCurrRecipe(getCurrRecipeIndex() - 1);
             updateAllComponents();
@@ -84,11 +85,11 @@ public class RecipeDisplay extends CookBookDisplay {
     }
 
     @Override
-    void hideCurrentDisplay () {
+    void hideCurrentDisplay() {
         getRecDisplay().setVisible(false);
     }
 
-    void updateAllComponents () {
+    void updateAllComponents() {
         this.recipe = getCategories().get(getCurrCategory())
                 .getRecipeList().get(getCurrRecipeIndex());
         currentNumberOfPeople = recipe.getPeople();
@@ -98,12 +99,12 @@ public class RecipeDisplay extends CookBookDisplay {
                 .stream().map(Ingredient::toString).collect(Collectors.toList()).toArray());
         recipeDescription.setText(recipe.getDescription());
         recipeTitle.setText("Recipe:     " + recipe.getTitle());
-        recipePicture.setImage(recipe.getImage());
+        recipePicture = recipe.getImage();
         picLabel.setIcon(recipePicture);
         picLabel.repaint();
     }
 
-    public void createAndShowGUI () throws IOException {
+    public void createAndShowGUI() throws IOException {
         numberOfPeople = (JLabel) createJComponent("JLabel", PEOPLE + currentNumberOfPeople, 100, 50);
         recipeTitle = (JLabel) createJComponent("JLabel", "Recipe:     " + recipe.getTitle(), 300, 50);
         recipeDescription = (JTextArea) createJComponent("JTextArea", recipe.getDescription(), 400, 100);
@@ -125,19 +126,19 @@ public class RecipeDisplay extends CookBookDisplay {
         setFrameProperties(recipeFrame, false);
     }
 
-    private void upScale () {
+    private void upScale() {
         currentNumberOfPeople++;
         updateList();
     }
 
-    private void downScale () {
+    private void downScale() {
         if (currentNumberOfPeople > 1) {
             currentNumberOfPeople--;
             updateList();
         }
     }
 
-    private void updateList () {
+    private void updateList() {
         numberOfPeople.setText(PEOPLE + currentNumberOfPeople);
         ingredientStringsJList.setListData(recipe.getIngredientList()
                 .stream().map(i -> i.reScale(currentNumberOfPeople)).collect(Collectors.toList()).toArray());

@@ -17,7 +17,7 @@ public class Ingredient {
     private int people;
 
     @JsonCreator
-    Ingredient (
+    Ingredient(
             @JsonProperty("name") String name,
             @JsonProperty("amount") int amount,
             @JsonProperty("unit") String unit,
@@ -28,25 +28,25 @@ public class Ingredient {
         this.people = people;
     }
 
-    String getName () {
+    String getName() {
         return name;
     }
 
-    String getUnit () {
+    String getUnit() {
         return unit;
     }
 
-    int getAmount () {
+    int getAmount() {
         return amount;
     }
 
-    public Ingredient reScale (int newNumberOfPeople) {
+    public Ingredient reScale(int newNumberOfPeople) {
         int rescaledAmount = amount * newNumberOfPeople / people;
         return new Ingredient(name, rescaledAmount, unit, newNumberOfPeople);
     }
 
     @Override
-    public String toString () {
+    public String toString() {
         return name + "   " + amount + "  " + unit;
     }
 }

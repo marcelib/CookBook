@@ -1,7 +1,7 @@
 {
   "recipes": [
     {
-      "imagePath": "./src/test/resources/testImage.png",
+      "imagePath": "/testImage.png",
       "description": "Great noodles for everyone",
       "ingredients": [
         {
@@ -21,7 +21,7 @@
       "people": 5
     },
     {
-      "imagePath": "./src/test/resources/testImage.png",
+      "imagePath": "/testImage.png",
       "description": "A classic dinner!",
       "ingredients": [
         {
@@ -41,6 +41,6 @@
       "people": 5
     }
   ],
-  "imagePath": "./src/test/resources/testImage.png",
+  "imagePath": "/testImage.png",
   "title": "Dinner"
 }

@@ -6,6 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,9 +18,7 @@ import java.util.logging.Logger;
 public class Recipe {
 
     @JsonIgnore
-    private static final Logger LOGGER = Logger.getLogger(Recipe.class.getName());
-    @JsonIgnore
-    private BufferedImage image;
+    private ImageIcon image;
     @JsonProperty("ingredients")
     private List<Ingredient> ingredientList;
     @JsonProperty("imagePath")
@@ -29,7 +28,7 @@ public class Recipe {
     private int people;
 
     @JsonCreator
-    Recipe (
+    Recipe(
             @JsonProperty("title") String title,
             @JsonProperty("description") String description,
             @JsonProperty("ingredients") List<Ingredient> ingredientList,
@@ -42,32 +41,28 @@ public class Recipe {
         this.people = people;
     }
 
-    public String getTitle () {
+    public String getTitle() {
         return title;
     }
 
-    public String getDescription () {
+    public String getDescription() {
         return description;
     }
 
-    public List<Ingredient> getIngredientList () {
+    public List<Ingredient> getIngredientList() {
         return ingredientList;
     }
 
     @JsonIgnore
-    public BufferedImage getImage () {
+    public ImageIcon getImage() {
         return image;
     }
 
-    public int getPeople () {
+    public int getPeople() {
         return people;
     }
 
-    void loadImage () {
-        try {
-            this.image = ImageIO.read(new File(imagePath));
-        } catch(IOException e) {
-            LOGGER.log(Level.SEVERE, "An IOException in Recipe class has occured", e);
-        }
+    void loadImage() {
+        this.image = new ImageIcon(getClass().getResource(imagePath));
     }
 }

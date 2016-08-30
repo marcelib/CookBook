@@ -19,7 +19,7 @@ public class CategoryDisplay extends CookBookDisplay {
     private JFrame categoryFrame;
     private JPanel recPanel;
 
-    public CategoryDisplay (Category category) throws IOException {
+    public CategoryDisplay(Category category) throws IOException {
         super();
         this.category = category;
         categoryFrame = new JFrame("CookBook");
@@ -27,19 +27,19 @@ public class CategoryDisplay extends CookBookDisplay {
     }
 
     @Override
-    public void setVisible (boolean b) {
+    public void setVisible(boolean b) {
         categoryFrame.setVisible(b);
     }
 
     @Override
-    void nextPage () {
+    void nextPage() {
         setCurrRecipe(0);
         showRecDisplay();
         hideCurrentDisplay();
     }
 
     @Override
-    void previousPage () {
+    void previousPage() {
         if (getCurrCategory() == 0) {
             showMenuDisplay();
             hideCurrentDisplay();
@@ -53,24 +53,24 @@ public class CategoryDisplay extends CookBookDisplay {
     }
 
     @Override
-    void hideCurrentDisplay () {
+    void hideCurrentDisplay() {
         getCatDisplay().setVisible(false);
         getCatDisplay().removeAll();
     }
 
-    void updateAllComponents () {
+    void updateAllComponents() {
         this.category = getCategories().get(getCurrCategory());
         getCatDisplay().recPanel.removeAll();
         try {
             getCatDisplay().createAndShowGUI();
-        } catch(IOException e) {
+        } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "An IOException has occurred", e);
         }
     }
 
-    public void createAndShowGUI () throws IOException {
+    public void createAndShowGUI() throws IOException {
 
-        JLabel picLabel = new JLabel(new ImageIcon(category.getCategoryImage()));
+        JLabel picLabel = new JLabel(category.getCategoryImage());
         JLabel catTitle = new JLabel("Category:     " + category.getTitle());
         catTitle.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
         catTitle.setFont(new Font(null, Font.PLAIN, 18));

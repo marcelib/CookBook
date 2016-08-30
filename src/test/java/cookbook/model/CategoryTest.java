@@ -12,12 +12,12 @@ import static org.junit.Assert.assertEquals;
 
 public class CategoryTest {
 
-    private final static String IMAGE_PATH = "./src/test/resources/testImage.png";
+    private final static String IMAGE_PATH = "/testImage.png";
     private String categoryJson;
     private Category testCategory;
 
     @Before
-    public void setUp () throws Exception {
+    public void setUp() throws Exception {
 
 
         Ingredient testIngredient1 = new Ingredient("Potato", 20, "Grams", 1);
@@ -35,19 +35,19 @@ public class CategoryTest {
     }
 
     @Test
-    public void categoryImageTest () {
-        assertEquals(576, testCategory.getCategoryImage().getHeight());
-        assertEquals(768, testCategory.getCategoryImage().getWidth());
+    public void categoryImageTest() {
+        assertEquals(576, testCategory.getCategoryImage().getIconHeight());
+        assertEquals(768, testCategory.getCategoryImage().getIconWidth());
     }
 
     @Test
-    public void imageListTest () {
-        assertEquals(576, testCategory.getRecipeList().get(0).getImage().getHeight());
-        assertEquals(768, testCategory.getRecipeList().get(0).getImage().getWidth());
+    public void imageListTest() {
+        assertEquals(576, testCategory.getRecipeList().get(0).getImage().getIconHeight());
+        assertEquals(768, testCategory.getRecipeList().get(0).getImage().getIconWidth());
     }
 
     @Test
-    public void toJsonTest () throws Exception {
+    public void toJsonTest() throws Exception {
         String testCategoryJson = (new JSONParser()
                 .parse(new ObjectMapper().writeValueAsString(testCategory))).toString();
         assertEquals(categoryJson, testCategoryJson);

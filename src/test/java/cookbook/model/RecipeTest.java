@@ -13,12 +13,12 @@ import static org.junit.Assert.assertEquals;
 
 public class RecipeTest {
 
-    private final static String IMAGE_PATH = "./src/test/resources/testImage.png";
+    private final static String IMAGE_PATH = "/testImage.png";
     private String recipeJson;
     private Recipe testRecipe;
 
     @Before
-    public void setUp () throws Exception {
+    public void setUp() throws Exception {
         recipeJson = new JSONParser()
                 .parse(new FileReader("./src/test/resources/json/testRecipe.json")).toString();
         testRecipe = new Recipe("Noodles", "Great noodles for everyone",
@@ -30,31 +30,30 @@ public class RecipeTest {
     }
 
     @Test
-    public void ingredientsTest () {
+    public void ingredientsTest() {
         assertEquals("Potato", testRecipe.getIngredientList().get(0).getName());
         assertEquals("Grams", testRecipe.getIngredientList().get(0).getUnit());
         assertEquals(20, testRecipe.getIngredientList().get(0).getAmount());
-
     }
 
     @Test
-    public void titleTest () {
+    public void titleTest() {
         assertEquals("Noodles", testRecipe.getTitle());
     }
 
     @Test
-    public void descriptionTest () {
+    public void descriptionTest() {
         assertEquals("Great noodles for everyone", testRecipe.getDescription());
     }
 
     @Test
-    public void imagesTest () throws IOException {
-        assertEquals(576, testRecipe.getImage().getHeight());
-        assertEquals(768, testRecipe.getImage().getWidth());
+    public void imagesTest() throws IOException {
+        assertEquals(576, testRecipe.getImage().getIconHeight());
+        assertEquals(768, testRecipe.getImage().getIconWidth());
     }
 
     @Test
-    public void toJsonTest () throws Exception {
+    public void toJsonTest() throws Exception {
         String testRecipeJSON = (new JSONParser()
                 .parse(new ObjectMapper().writeValueAsString(testRecipe))).toString();
         assertEquals(recipeJson, testRecipeJSON);

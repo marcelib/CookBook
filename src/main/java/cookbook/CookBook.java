@@ -25,15 +25,15 @@ public class CookBook {
     private static CategoryDisplay catDisplay;
     private static MenuDisplay menuDisplay;
 
-    private CookBook () {
+    private CookBook() {
     }
 
-    public static void main (String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
 
         try {
-            categories = new JsonReader().readCategories("./src/main/resources/json/categories.json");
+            categories = new JsonReader().readCategories("/json/categories.json");
             categories.forEach(Category::loadImages);
-        } catch(Exception e) {
+        } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "An exception has occured while loading categories", e);
             return;
         }
@@ -48,53 +48,53 @@ public class CookBook {
                 getCatDisplay().createAndShowGUI();
                 getRecDisplay().createAndShowGUI();
                 getMenuDisplay().createAndShowGUI();
-            } catch(IOException e) {
+            } catch (IOException e) {
                 LOGGER.log(Level.SEVERE, "An exception has occured while loading GUI", e);
             }
         });
     }
 
-    public static Integer getCurrCategory () {
+    public static Integer getCurrCategory() {
         return currentCategory;
     }
 
-    public static void setCurrCategory (Integer currentCategory) {
+    public static void setCurrCategory(Integer currentCategory) {
         CookBook.currentCategory = currentCategory;
     }
 
-    public static Integer getCurrRecipeIndex () {
+    public static Integer getCurrRecipeIndex() {
         return currentRecipe;
     }
 
-    public static void setCurrRecipe (Integer currentRecipe) {
+    public static void setCurrRecipe(Integer currentRecipe) {
         CookBook.currentRecipe = currentRecipe;
     }
 
-    public static List<Category> getCategories () {
+    public static List<Category> getCategories() {
         return categories;
     }
 
-    public static RecipeDisplay getRecDisplay () {
+    public static RecipeDisplay getRecDisplay() {
         return recDisplay;
     }
 
-    private static void setRecDisplay (RecipeDisplay recDisplay) {
+    private static void setRecDisplay(RecipeDisplay recDisplay) {
         CookBook.recDisplay = recDisplay;
     }
 
-    public static CategoryDisplay getCatDisplay () {
+    public static CategoryDisplay getCatDisplay() {
         return catDisplay;
     }
 
-    private static void setCatDisplay (CategoryDisplay catDisplay) {
+    private static void setCatDisplay(CategoryDisplay catDisplay) {
         CookBook.catDisplay = catDisplay;
     }
 
-    public static MenuDisplay getMenuDisplay () {
+    public static MenuDisplay getMenuDisplay() {
         return menuDisplay;
     }
 
-    private static void setMenuDisplay (MenuDisplay menuDisplay) {
+    private static void setMenuDisplay(MenuDisplay menuDisplay) {
         CookBook.menuDisplay = menuDisplay;
     }
 }

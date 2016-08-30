@@ -7,27 +7,28 @@ import static cookbook.CookBook.*;
 
 class DisplayUtils {
 
-    private DisplayUtils () {}
+    private DisplayUtils() {
+    }
 
     /* methods responsible for showing a specific display type*/
-    static void showRecDisplay () {
+    static void showRecDisplay() {
         getRecDisplay().updateAllComponents();
         getRecDisplay().setVisible(true);
         getCatDisplay().setLocationRelativeTo(null);
     }
 
-    static void showMenuDisplay () {
+    static void showMenuDisplay() {
         getMenuDisplay().setVisible(true);
         getCatDisplay().setLocationRelativeTo(null);
     }
 
-    static void showCatDisplay () {
+    static void showCatDisplay() {
         getCatDisplay().updateAllComponents();
         getCatDisplay().setVisible(true);
         getCatDisplay().setLocationRelativeTo(null);
     }
 
-    static JComponent createJComponent (String type, String title, int width, int height) {
+    static JComponent createJComponent(String type, String title, int width, int height) {
         JComponent component;
         if ("JLabel".equals(type)) {
             component = new JLabel(title);
@@ -40,13 +41,13 @@ class DisplayUtils {
         return component;
     }
 
-    static void setComponentProperties (JComponent component, int width, int height) {
+    static void setComponentProperties(JComponent component, int width, int height) {
         component.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
         component.setPreferredSize(new Dimension(width, height));
         component.setFont(new Font(null, Font.PLAIN, 18));
     }
 
-    static void setFrameProperties (JFrame frame, boolean visibility) {
+    static void setFrameProperties(JFrame frame, boolean visibility) {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setResizable(false);

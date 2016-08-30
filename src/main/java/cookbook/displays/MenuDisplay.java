@@ -17,29 +17,29 @@ public class MenuDisplay extends CookBookDisplay {
     private JFrame menuFrame;
     private JLabel picLabel;
 
-    public MenuDisplay () throws IOException {
+    public MenuDisplay() throws IOException {
         picLabel = new JLabel();
-        picLabel.setIcon(new ImageIcon(ImageIO.read(new File("images/StartPage.jpeg"))));
+        picLabel.setIcon(new ImageIcon(getClass().getResource("/images/StartPage.jpeg")));
     }
 
     @Override
-    public void setVisible (boolean b) {
+    public void setVisible(boolean b) {
         menuFrame.setVisible(b);
     }
 
     @Override
-    void hideCurrentDisplay () {
+    void hideCurrentDisplay() {
         menuFrame.setVisible(false);
     }
 
     @Override
-    void nextPage () {
+    void nextPage() {
         setCurrCategory(0);
         showCatDisplay();
         hideCurrentDisplay();
     }
 
-    public void createAndShowGUI () throws IOException {
+    public void createAndShowGUI() throws IOException {
 
         menuFrame = new JFrame("CookBook- Welcome!");
         JPanel recPanel = new JPanel(new MigLayout());
